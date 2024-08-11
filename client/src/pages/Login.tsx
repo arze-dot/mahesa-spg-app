@@ -14,21 +14,23 @@ const Login: React.FC = () => {
 
     const handleLogin = () => {
         setIsLoading(true);
-        setTimeout(() => {
-            login();
+        setTimeout(async () => {
+            const result = await login(email, password);
+            if (result) {
+                navigate('/dashboard');
+            }
             setIsLoading(false);
-            navigate('/dashboard');
-        }, 2000); // Simulate an API call
+        }, 2000);
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-deep-red to-bright-red p-4">
+        <div className="flex flex-col items-center justify-center h-screen bg-gradient-to-b from-deep-red to-bright-red p-4 max-w-[400px] relative m-auto">
             <img src="/images/wave-top.png" alt="wave top" className="absolute top-0 w-full" />
             <h2 className="text-2xl text-white mb-6">Hi Please Login!</h2>
 
             <InputField
-                type="email"
-                placeholder="Email"
+                type="username"
+                placeholder="Username"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />

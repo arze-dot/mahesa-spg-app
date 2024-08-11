@@ -4,10 +4,9 @@ import { Icon } from '@iconify/react';
 
 const Dashboard: React.FC = () => {
     const { pathname } = useLocation()
-    console.log(pathname)
     const active = true
     return (
-        <div className="flex flex-col h-screen bg-white">
+        <div className="flex flex-col h-screen bg-white max-w-[400px] m-auto relative">
             <div className="absolute top-0 w-full">
                 <img src="/images/dashboard-wave-top.png" alt="wave top" />
                 <p className='absolute top-0 w-full'>testing 1</p>
