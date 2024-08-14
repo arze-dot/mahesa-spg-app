@@ -10,6 +10,9 @@ import Employee from "./pages/input/employee/Employee";
 import Report from "./pages/report/Report";
 import ReportSpg from "./pages/report/daily-report-spg/ReportSpg";
 import ReportCompetitor from "./pages/report/daily-report-competitor/ReportCompetitor";
+import Inputemployee from "./pages/input/employee/Inputemployee";
+import Assetinput from "./pages/input/asset/Assetinput";
+import Productinput from "./pages/input/product/Productinput";
 
 const App: React.FC = () => {
   return (
@@ -26,13 +29,16 @@ const App: React.FC = () => {
         >
           <Route index element={<Home />} />
           <Route path="input" element={<Input />} />
-          <Route path="input/outlet" element={<Outlet />} />
+          <Route path="input/Outlet" element={<Outlet />} />
           <Route path="input/product" element={<Product />} />
           <Route path="input/asset" element={<Asset />} />
           <Route path="input/employee" element={<Employee />} />
           <Route path="report" element={<Report />} />
           <Route path="report/daily-spg" element={<ReportSpg />} />
           <Route path="report/daily-competitor" element={<ReportCompetitor />} />
+          <Route path="input/Inputemployee" element={<Inputemployee />} />
+          <Route path="input/Assetinput" element={<Assetinput />} />
+          <Route path="input/Productinput" element={<Productinput />} />
         </Route>
       </Routes>
     </BrowserRouter>

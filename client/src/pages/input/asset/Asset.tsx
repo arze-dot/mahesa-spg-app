@@ -13,7 +13,9 @@ const Asset: React.FC = () => {
       <div className='flex items-center justify-between p-2 rounded-lg mb-1'>
         <h1 className='text-lg font-bold'>Daftar Asset</h1>
         <div className="bg-gray-300 p-2 rounded-md hover:bg-gray-400 cursor-pointer">
-          <Icon icon="mdi:plus" className="text-black" />
+          <a href="/dashboard/input/Assetinput">
+            <Icon icon="mdi:plus" className="text-black" />
+          </a>
         </div>
       </div>
 
