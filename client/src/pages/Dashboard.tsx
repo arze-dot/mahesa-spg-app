@@ -5,7 +5,6 @@ import Breadcrumb from '../component/Breadcrumbs';
 
 const Dashboard: React.FC = () => {
     const { pathname } = useLocation()
-    const active = true
     return (
         <div className="flex flex-col h-screen bg-white max-w-[400px] m-auto relative">
             <div className="absolute top-0 w-full">
