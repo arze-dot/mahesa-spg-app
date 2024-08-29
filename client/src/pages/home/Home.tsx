@@ -146,7 +146,7 @@ const Home: React.FC = () => {
                     <h3 className="text-lg font-semibold mb-1">Outlet Terdaftar</h3>
                     <p className="text-gray-500">Total</p>
                     <p className="text- font-bold">50</p>
-                    <a href="/dashboard/input/Outlet" className="text-blue-500 hover:underline mt-2 block">
+                    <a href="/dashboard/input/Outletlist" className="text-blue-500 hover:underline mt-2 block">
                         Lihat Semua Outlet &gt;
                     </a>
                 </div>
