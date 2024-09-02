@@ -5,7 +5,7 @@ const Outletinput: React.FC = () => {
 
     return (
         <div className="flex items-center justify-center min-h-screen">
-            <div className="bg-gray-300 p-6 rounded-lg w-96">
+            <div className="bg-[#AFAFAF] p-6 rounded-lg w-96">
                 <div className="flex justify-center mb-4">
                     <img
                         src="https://via.placeholder.com/80"
@@ -51,8 +51,10 @@ const Outletinput: React.FC = () => {
                     <select
                         className="w-full px-3 py-2 border border-gray-400 rounded-md" >
                         <option value="">Kode Area</option>
-                        <option value="area1">Area 1</option>
-                        <option value="area2">Area 2</option>
+                        <option value="area1">PMU</option>
+                        <option value="area2">PMM</option>
+                        <option value="area2">PMA</option>
+                        <option value="area2">PMS</option>
                     </select>
                 </div>
 
