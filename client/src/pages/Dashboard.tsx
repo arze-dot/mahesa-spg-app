@@ -7,7 +7,7 @@ const Dashboard: React.FC = () => {
     const { pathname } = useLocation()
     return (
         <div className="flex flex-col h-screen bg-white max-w-[400px] m-auto relative">
-            <div className="absolute top-0 w-full">
+            <div className="fixed top-0 w-full z-50">
                 <img src="/images/dashboard-wave-top.png" alt="wave top" />
                 <div className='absolute top-0 w-full'>          <Breadcrumb />
                 </div>
@@ -15,7 +15,7 @@ const Dashboard: React.FC = () => {
             <div className="flex-1 p-4 mt-[120px]">
                 <Outlet />
             </div>
-            <div className="flex justify-around bg-gray-200 p-2">
+            <div className="fixed bottom-0 w-full max-w-[400px] flex justify-around bg-gray-200 p-2">
                 <a href="/dashboard" className="text-center flex flex-col items-center">
                     <Icon className={`text-2xl ${pathname === '/dashboard' ? 'text-[#AC1919]' : ''} `} icon="material-symbols:home" />
                     <div className="text-xs">Home</div>
