@@ -1,6 +1,6 @@
 import React from "react";
 
-const Inputemployee: React.FC = () => {
+const InputEmployee: React.FC = () => {
 
     return (
         <div className="rounded-md min-h-screen flex items-center justify-center">
@@ -120,4 +120,4 @@ const Inputemployee: React.FC = () => {
     );
 };
 
-export default Inputemployee;
+export default InputEmployee;

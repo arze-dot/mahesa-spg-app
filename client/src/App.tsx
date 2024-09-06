@@ -10,11 +10,12 @@ import Employee from "./pages/input/employee/Employee";
 import Report from "./pages/report/Report";
 import ReportSpg from "./pages/report/daily-report-spg/ReportSpg";
 import ReportCompetitor from "./pages/report/daily-report-competitor/ReportCompetitor";
-import Inputemployee from "./pages/input/employee/Inputemployee";
 import Assetinput from "./pages/input/asset/Assetinput";
 import Productinput from "./pages/input/product/Productinput";
 import Outletlist from "./pages/input/outlet/Outletlist";
 import Outletinput from "./pages/input/outlet/Outletinput";
+import { URL } from "./config/url_constant";
+import InputEmployee from "./pages/input/employee/InputEmployee";
 
 const App: React.FC = () => {
   return (
@@ -38,7 +39,7 @@ const App: React.FC = () => {
           <Route path="report" element={<Report />} />
           <Route path="report/daily-spg" element={<ReportSpg />} />
           <Route path="report/daily-competitor" element={<ReportCompetitor />} />
-          <Route path="input/Inputemployee" element={<Inputemployee />} />
+          <Route path={URL.INPUT.INDEX + URL.INPUT.EMPLOYEE.CREATE} element={<InputEmployee />} />
           <Route path="input/Assetinput" element={<Assetinput />} />
           <Route path="input/Productinput" element={<Productinput />} />
           <Route path="input/Outletinput" element={<Outletinput />} />

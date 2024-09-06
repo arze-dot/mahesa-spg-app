@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon } from '@iconify/react';
+import { URL } from '../../config/url_constant';
 
 const Input: React.FC = () => {
     return (
@@ -22,7 +23,7 @@ const Input: React.FC = () => {
                         <Icon className='h-[68px] w-[68px] text-[#AC1919]' icon="material-symbols:dataset-outline" />
                         <div className='font-semibold text-[20px]'>Asset</div>
                     </a>
-                    <a href="/dashboard/input/employee" className="bg-[#D3AA4A] flex flex-col items-center justify-center gap-2 border border-black p-4 rounded shadow text-center">
+                    <a href={URL.INPUT.EMPLOYEE.INDEX} className="bg-[#D3AA4A] flex flex-col items-center justify-center gap-2 border border-black p-4 rounded shadow text-center">
                         <Icon className='h-[68px] w-[68px] pt-[8px] text-[#AC1919]' icon="bi:people" />
                         <div className='font-semibold text-[20px]'>Employee</div>
                     </a>

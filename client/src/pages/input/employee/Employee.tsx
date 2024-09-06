@@ -1,36 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Searchbar from '../../../component/SearchBar';
+import { URL } from '../../../config/url_constant';
+import ACT_GET_USERS from '../../../api/users';
 
 const Employee: React.FC = () => {
+
+  const [data, setData] = useState([])
+
+  const getUsers = async () => {
+    const result = await ACT_GET_USERS()
+
+    setData(result.data.data.data)
+  }
+  useEffect(() => {
+    getUsers()
+  }, [])
   return (
     <div>
-      <div className='py-1 relative place-items-start justify-center mb-12'>
-        <Searchbar />
+      <div className='py-1 relative place-items-start justify-center mb-6'>
+        <Searchbar placeholder='Cari Karyawan' />
       </div>
 
       <div className='flex items-center justify-between p-2 rounded-lg mb-1'>
         <h1 className='text-lg font-bold'>Daftar Karyawan</h1>
         <div className="bg-gray-300 p-2 rounded-md hover:bg-gray-400 cursor-pointer">
-          <a href="/dashboard/input/Inputemployee">
-          <Icon icon="mdi:plus" className="text-black" />
+          <a href={URL.INPUT.EMPLOYEE.CREATE}>
+            <Icon icon="mdi:plus" className="text-black" />
           </a>
         </div>
       </div>
 
       <div className="item">
-        <div className='p-4 mb-4 h-[598px] w-[363px] rounded-lg bg-[#AFAFAF] shadow-sm overflow-y-auto'>
-          <div className="border border-black p-4 mb-4 rounded-lg bg-white shadow-sm flex items-center">
-            <img className="w-12 h-12 rounded-md mr-4" alt="Placeholder" src="https://via.placeholder.com/150" />
-            <div className="flex-grow">
-              <div className="font-bold">Employee Name</div>
-              <div className="text-gray-500">Karyawan Tetap</div>
-            </div>
-            <div className="flex-shrink-0 flex space-x-2">
-              <Icon icon="mdi:pencil" className="text-gray-500 cursor-pointer" />
-              <Icon icon="mdi:delete" className="text-gray-500 cursor-pointer" />
-            </div>
-          </div>
+        <div className='p-4 mb-4 h-[598px] w-[363px] rounded-3xl bg-[#AFAFAF] shadow-sm overflow-y-auto'>
+
+          {
+            data.map((item: any, index) => {
+              return (
+                <div className="border border-black p-4 mb-4 rounded-lg bg-white shadow-sm flex items-center" key={index}>
+                  <div className='w-12 h-12 rounded-full mr-4 bg-red-800 text-[20px] font-bold text-white flex items-center justify-center'>
+                    {item.full_name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="flex-grow">
+                    <div className="font-bold">{item.full_name}</div>
+                    <div className="text-gray-500 text-[12px]">{item.employee_status}</div>
+                  </div>
+                  <div className="flex-shrink-0 flex space-x-2">
+                    <Icon icon="mdi:pencil" className="text-gray-500 cursor-pointer" />
+                    <Icon icon="mdi:delete" className="text-gray-500 cursor-pointer" />
+                  </div>
+                </div>
+
+              )
+            })
+          }
         </div>
       </div>
     </div>
