@@ -1,7 +1,26 @@
-import React from "react";
+import React, { ChangeEvent, useState } from "react";
 
 const InputEmployee: React.FC = () => {
 
+    const [data, setData] = useState({
+        full_name: '',
+        nik: '',
+        email: '',
+        phone: '',
+        address: '',
+        birth_date: '',
+        employee_status: '',
+        gender: ''
+    })
+
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setData({
+            ...data,
+            [e.target.name]: e.target.value
+        })
+    }
+
+    console.log(data)
     return (
         <div className="rounded-md min-h-screen flex items-center justify-center">
             <div className="bg-[#AFAFAF] rounded-md shadow-lg p-8 w-96">
@@ -17,6 +36,9 @@ const InputEmployee: React.FC = () => {
                         <input
                             type="text"
                             id="nama"
+                            name='full_name'
+                            onChange={handleChange}
+                            value={data.full_name}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -28,6 +50,9 @@ const InputEmployee: React.FC = () => {
                         <input
                             type="text"
                             id="nik"
+                            name='nik'
+                            onChange={handleChange}
+                            value={data.nik}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -39,6 +64,9 @@ const InputEmployee: React.FC = () => {
                         <input
                             type="email"
                             id="email"
+                            name='email'
+                            onChange={handleChange}
+                            value={data.email}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -50,6 +78,9 @@ const InputEmployee: React.FC = () => {
 
                         <input
                             type="tel"
+                            name='phone'
+                            onChange={handleChange}
+                            value={data.phone}
                             id="telepon"
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             placeholder="081122"
@@ -61,9 +92,11 @@ const InputEmployee: React.FC = () => {
                         <label htmlFor="alamat" className="block text-gray-700 text-sm font-bold mb-2">
                             Alamat
                         </label>
-
                         <textarea
                             id="alamat"
+                            name='address'
+                            value={data.address}
+                            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setData({ ...data, address: e.target.value })}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -75,6 +108,9 @@ const InputEmployee: React.FC = () => {
                         <input
                             type="date"
                             id="tanggal_lahir"
+                            name='birth_date'
+                            onChange={handleChange}
+                            value={data.birth_date}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         />
                     </div>
@@ -84,12 +120,15 @@ const InputEmployee: React.FC = () => {
                             Status Karyawan
                         </label>
                         <select
+                            name='employee_status'
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => setData({ ...data, employee_status: e.target.value })}
+                            value={data.employee_status}
                             id="status_karyawan"
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         >
-                            <option value="tetap">Tetap</option>
-                            <option value="kontrak">Kontrak</option>
-                            <option value="magang">Magang</option>
+                            <option value="full_time">Tetap</option>
+                            <option value="contract">Kontrak</option>
+                            <option value="internship">Magang</option>
                         </select>
                     </div>
 
@@ -99,6 +138,9 @@ const InputEmployee: React.FC = () => {
                         </label>
                         <select
                             id="jenis_kelamin"
+                            name='gender'
+                            onChange={(e: ChangeEvent<HTMLSelectElement>) => setData({ ...data, gender: e.target.value })}
+                            value={data.gender}
                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         >
                             <option value="pria">Pria</option>
