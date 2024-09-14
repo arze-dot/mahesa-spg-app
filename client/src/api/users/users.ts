@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL_USER } from "../config/constant";
+import { API_URL_USER } from "../../config/constant";
 import { Cookies } from "react-cookie";
 
 const ACT_GET_USERS = async () => {

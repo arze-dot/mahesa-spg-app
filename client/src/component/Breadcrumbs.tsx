@@ -15,7 +15,7 @@ const breadcrumbNameMap: { [key: string]: string } = {
   "/dashboard/report/daily-competitor": "Daily Competitor Report",
   "/dashboard/input/Productinput": "Product Input",
   "/dashboard/input/Assetinput": "Asset input",
-  "/dashboard/input/Inputemployee": "employee input",
+  "/dashboard/input/input-employee": "Add Employee",
 };
 
 const Breadcrumb: React.FC = () => {

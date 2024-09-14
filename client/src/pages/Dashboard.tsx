@@ -6,7 +6,7 @@ import Breadcrumb from '../component/Breadcrumbs';
 const Dashboard: React.FC = () => {
     const { pathname } = useLocation()
     return (
-        <div className="flex flex-col h-screen bg-[#E0E0E0] max-w-[390px] m-auto relative">
+        <div className="flex flex-col h-full bg-[#E0E0E0] max-w-[390px] m-auto relative">
             <div className="fixed top-[-5px] w-full z-50">
                 <img src="/images/dashboard-wave-top.png" alt="wave top" />
                 <div className='absolute top-0 w-full'>

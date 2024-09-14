@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Searchbar from '../../../component/SearchBar';
 import { URL } from '../../../config/url_constant';
-import ACT_GET_USERS from '../../../api/users';
+import ACT_GET_USERS from '../../../api/users/users';
 
 const Employee: React.FC = () => {
 
@@ -16,6 +16,13 @@ const Employee: React.FC = () => {
   useEffect(() => {
     getUsers()
   }, [])
+
+
+  const employeeStatusLang = (status: string) => {
+    if (status === 'full_time') return 'Karyawan Tetap'
+    if (status === 'contract') return 'Karyawan Kontrak'
+    if (status === 'internship') return 'Karyawan Magang'
+  }
   return (
     <div>
       <div className='py-1 relative place-items-start justify-center mb-6'>
@@ -43,7 +50,7 @@ const Employee: React.FC = () => {
                   </div>
                   <div className="flex-grow">
                     <div className="font-bold">{item.full_name}</div>
-                    <div className="text-gray-500 text-[12px]">{item.employee_status}</div>
+                    <div className="text-gray-500 text-[12px]">{employeeStatusLang(item.employee_status)}</div>
                   </div>
                   <div className="flex-shrink-0 flex space-x-2">
                     <Icon icon="mdi:pencil" className="text-gray-500 cursor-pointer" />
