@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\OutletController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ReportController;
@@ -64,4 +65,8 @@ Route::group([
     Route::get('reports/{id}', [ReportController::class, 'show']);
     Route::put('reports/{id}', [ReportController::class, 'update']);
     Route::delete('reports/{id}', [ReportController::class, 'destroy']);
+
+
+    // Upload 
+    Route::post('/upload', [FileUploadController::class, 'upload']);
 });
