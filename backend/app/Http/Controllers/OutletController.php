@@ -18,7 +18,7 @@ class OutletController extends Controller
         }
 
         $outlets = $query->orderBy($request->get('sort', 'updated_at'), $request->get('order', 'desc'))
-            ->paginate(10);
+            ->get();
 
         return response()->json([
             'message' => 'Outlets retrieved successfully',

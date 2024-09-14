@@ -10,20 +10,28 @@ class ReportController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Report::query();
+        $query = Report::query()->with('product'); // Eager load the product details
 
         if ($request->has('search')) {
-            // Add search logic...
+            // Add search logic here if needed
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('report_column', 'like', '%' . $search . '%') // Adjust 'report_column' as needed
+                    ->orWhereHas('product', function ($q) use ($search) {
+                        $q->where('name', 'like', '%' . $search . '%'); // Assuming 'name' is a column in the products table
+                    });
+            });
         }
 
         $reports = $query->orderBy($request->get('sort', 'updated_at'), $request->get('order', 'desc'))
-            ->paginate(10);
+            ->get();
 
         return response()->json([
             'message' => 'Reports retrieved successfully',
             'data' => $reports
         ]);
     }
+
 
     public function store(Request $request)
     {

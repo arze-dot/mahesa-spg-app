@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Icon } from '@iconify/react';
 import Searchbar from '../../component/SearchBar';
+import ACT_GET_REPORT from '../../api/reports/reports';
 
 const Home: React.FC = () => {
+
+    const [data, setData] = useState([])
+    const getData = async () => {
+        const result = await ACT_GET_REPORT();
+        setData(result.data.data);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
     return (<div className="min-h-screen p-4">
-        <div className="flex items-center justify-between bg-white overflow-y-auto">
+        <div className="flex items-center justify-between bg-transparent overflow-y-auto">
             <div className="flex items-center space-x-3">
                 <img
                     src="https://via.placeholder.com/40"
@@ -21,17 +32,36 @@ const Home: React.FC = () => {
             </div>
         </div>
 
-        <div className="flex flex-col items-center my-4">
-            <img src="/images/Kimbo-logo.png" alt="Kimbo Logo" className="w-79" />
-            <div className="text-red-600 text-xl font-bold">Berbagi Nikmat!</div>
+        <div className="flex flex-col items-center mt-10">
+            <Searchbar placeholder='Cari report per product' />
+        </div>
+        <div className='mt-5 flex flex-col items-start justify-start w-full'>
+            {
+                data.map((item: any, index) => {
+                    return (
+                        <div className="w-full border border-black p-4 mb-4 rounded-lg bg-white shadow-sm flex items-center gap-4" key={index}>
+                            <img src={'https://api-spg.mahesamegahmandiri.com' + item.product.image} className='w-[100px] h-[100px] object-cover rounded-lg' />
+
+                            <div className='flex flex-col items-start justify-start gap-2'>
+                                <p className='font-bold'>{item.product.name}</p>
+
+                                <div className='flex items-center justify-center'>
+                                    <p className='w-[120px] text-[12px]'>Stok Awal</p>
+                                    <p className='bg-green-400 p-2 rounded-lg text-[10px]'>{item.first_stock}</p>
+                                </div>
+                                <div className='flex items-center justify-center'>
+                                    <p className='w-[120px] text-[12px]'>Stok Akhir</p>
+                                    <p className='bg-green-400 p-2 rounded-lg text-[10px]'>{item.sell_in}</p>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                })
+            }
         </div>
 
-        <div className="flex flex-col items-center mb-10">
-            <Searchbar />
 
-        </div>
-
-        <div className="px-4 mb-6 mt-5 overflow-y-auto ">
+        {/* <div className="px-4 mb-6 mt-5 overflow-y-auto ">
             <h2 className="text-lg font-semibold mb-4">Grafik Area</h2>
             <div className="flex flex-col items-center">
                 <div className="grid grid-cols-2 w-[339px] gap-4 p-4 rounded-md bg-[#ADAAAA] overflow-x-auto">
@@ -181,7 +211,7 @@ const Home: React.FC = () => {
                     </a>
                 </div>
             </div>
-        </div>
+        </div> */}
 
     </div>
     );

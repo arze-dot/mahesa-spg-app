@@ -18,7 +18,7 @@ class UserController extends Controller
         }
 
         $users = $query->orderBy($request->get('sort', 'updated_at'), $request->get('order', 'desc'))
-            ->paginate(10);
+            ->get();
 
         return response()->json([
             'message' => 'Users retrieved successfully',

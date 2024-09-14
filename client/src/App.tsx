@@ -10,14 +10,16 @@ import Employee from "./pages/input/employee/Employee";
 import Report from "./pages/report/Report";
 import ReportSpg from "./pages/report/daily-report-spg/ReportSpg";
 import ReportCompetitor from "./pages/report/daily-report-competitor/ReportCompetitor";
-import Assetinput from "./pages/input/asset/Assetinput";
-import Productinput from "./pages/input/product/Productinput";
 import { URL } from "./config/url_constant";
 import InputEmployee from "./pages/input/employee/InputEmployee";
 import EditEmployee from "./pages/input/employee/EditEmployee";
 import Outlet from "./pages/input/outlet/Outlet";
 import InputOutlet from "./pages/input/outlet/InputOutlet";
 import EditOutlet from "./pages/input/outlet/EditOutlet";
+import InputProduct from "./pages/input/product/InputProduct";
+import EditProduct from "./pages/input/product/EditProduct";
+import InputAsset from "./pages/input/asset/InputAsset";
+import EditAsset from "./pages/input/asset/EditAsset";
 
 const App: React.FC = () => {
 
@@ -47,15 +49,21 @@ const App: React.FC = () => {
           <Route path={URL.INPUT.INDEX + URL.INPUT.EMPLOYEE.EDIT + '/:id'} element={<EditEmployee />} />
 
 
+          {/* INPUT PRODUCT */}
           <Route path="input/product" element={<Product />} />
+          <Route path={URL.INPUT.INDEX + URL.INPUT.PRODUCT.CREATE} element={<InputProduct />} />
+          <Route path={URL.INPUT.INDEX + URL.INPUT.PRODUCT.EDIT + '/:id'} element={<EditProduct />} />
+
+          {/* INPUT ASSET */}
           <Route path="input/asset" element={<Asset />} />
+          <Route path={URL.INPUT.INDEX + URL.INPUT.ASSET.CREATE} element={<InputAsset />} />
+          <Route path={URL.INPUT.INDEX + URL.INPUT.ASSET.EDIT + '/:id'} element={<EditAsset />} />
+
           <Route path="report" element={<Report />} />
           <Route path="report/daily-spg" element={<ReportSpg />} />
           <Route path="report/daily-competitor" element={<ReportCompetitor />} />
 
 
-          <Route path="input/Assetinput" element={<Assetinput />} />
-          <Route path="input/Productinput" element={<Productinput />} />
         </Route>
       </Routes>
     </BrowserRouter>

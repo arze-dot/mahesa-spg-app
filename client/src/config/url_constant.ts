@@ -12,5 +12,15 @@ export const URL = {
             CREATE: 'input-outlet',
             EDIT: 'edit-outlet',
         },
+        PRODUCT: {
+            INDEX: 'input/product',
+            CREATE: 'input-product',
+            EDIT: 'edit-product',
+        },
+        ASSET: {
+            INDEX: 'input/asset',
+            CREATE: 'input-asset',
+            EDIT: 'edit-asset',
+        },
     }
 }

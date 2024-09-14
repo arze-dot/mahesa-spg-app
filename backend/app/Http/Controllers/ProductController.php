@@ -19,7 +19,7 @@ class ProductController extends Controller
         }
 
         $products = $query->orderBy($request->get('sort', 'updated_at'), $request->get('order', 'desc'))
-            ->paginate(10);
+            ->get();
 
         return response()->json([
             'message' => 'Products retrieved successfully',
