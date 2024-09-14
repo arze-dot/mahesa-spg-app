@@ -44,7 +44,7 @@ const Breadcrumb: React.FC = () => {
               }`}
             onClick={handleBreadcrumbClick}
           >
-            {breadcrumbNameMap[currentPath] || "Page"}
+            {breadcrumbNameMap[currentPath] || "Kembali"}
           </span>
         </li>
       </ul>

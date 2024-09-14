@@ -3,10 +3,13 @@ import { Icon } from '@iconify/react';
 import Searchbar from '../../../component/SearchBar';
 import { URL } from '../../../config/url_constant';
 import ACT_GET_USERS from '../../../api/users/users';
+import { useNavigate } from 'react-router-dom';
+import ACT_DELETE_USER from '../../../api/users/delete-user';
 
 const Employee: React.FC = () => {
 
   const [data, setData] = useState([])
+  const navigate = useNavigate()
 
   const getUsers = async () => {
     const result = await ACT_GET_USERS()
@@ -22,6 +25,21 @@ const Employee: React.FC = () => {
     if (status === 'full_time') return 'Karyawan Tetap'
     if (status === 'contract') return 'Karyawan Kontrak'
     if (status === 'internship') return 'Karyawan Magang'
+  }
+
+
+  const deleteEmployee = async (id: string) => {
+    if (confirm('Apakah anda yakin ingin menghapus karyawan ?')) {
+      await ACT_DELETE_USER(id).then((res) => {
+        if (res.status === 200) {
+          alert('Karyawan berhasil dihapus')
+          getUsers()
+        }
+      }).catch((err) => {
+        console.log(err)
+        alert('Terjadi kesalahan dalam penghapusan karyawan')
+      })
+    }
   }
   return (
     <div>
@@ -53,8 +71,8 @@ const Employee: React.FC = () => {
                     <div className="text-gray-500 text-[12px]">{employeeStatusLang(item.employee_status)}</div>
                   </div>
                   <div className="flex-shrink-0 flex space-x-2">
-                    <Icon icon="mdi:pencil" className="text-gray-500 cursor-pointer" />
-                    <Icon icon="mdi:delete" className="text-gray-500 cursor-pointer" />
+                    <Icon icon="mdi:pencil" className="text-gray-500 cursor-pointer" onClick={() => navigate('/dashboard/input/edit-employee/' + item.id)} />
+                    <Icon icon="mdi:delete" className="text-gray-500 cursor-pointer" onClick={() => deleteEmployee(item.id)} />
                   </div>
                 </div>
 

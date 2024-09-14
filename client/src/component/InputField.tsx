@@ -1,4 +1,3 @@
-import { Icon } from '@iconify/react/dist/iconify.js';
 import React, { ReactNode } from 'react';
 
 interface InputFieldProps {
@@ -11,7 +10,7 @@ interface InputFieldProps {
     showPasswordToggle?: boolean;
     showPassword?: boolean;
     togglePasswordVisibility?: () => void;
-    icon: ReactNode;
+    icon?: ReactNode;
     name?: string;
     as?: 'textarea' | 'select'
     children?: ReactNode;

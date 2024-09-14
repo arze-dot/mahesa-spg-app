@@ -65,7 +65,6 @@ class OutletController extends Controller
 
         $validator = FacadesValidator::make($request->all(), [
             'name' => 'string|max:255',
-            'code' => 'date',
             'user_id' => 'exists:users,id',
             // Add other validations...
         ]);

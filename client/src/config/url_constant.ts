@@ -5,6 +5,12 @@ export const URL = {
         EMPLOYEE: {
             INDEX: 'input/employee',
             CREATE: 'input-employee',
+            EDIT: 'edit-employee',
+        },
+        OUTLET: {
+            INDEX: 'input/outlet',
+            CREATE: 'input-outlet',
+            EDIT: 'edit-outlet',
         },
     }
 }

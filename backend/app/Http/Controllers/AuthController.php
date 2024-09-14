@@ -56,7 +56,7 @@ class AuthController extends Controller
     {
         // Data validation
         $validator = Validator::make($request->all(), [
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required',
         ]);
 
@@ -69,7 +69,7 @@ class AuthController extends Controller
         $myTTL = 60 * 24 * 7;
         JWTAuth::factory()->setTTL($myTTL);
         $token = JWTAuth::attempt([
-            "email" => $request->email,
+            "username" => $request->username,
             "password" => $request->password
         ]);
 

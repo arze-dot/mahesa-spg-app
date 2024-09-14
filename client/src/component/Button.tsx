@@ -23,6 +23,7 @@ const Button: React.FC<ButtonProps> = ({
     return (
         <button
             onClick={onClick}
+            type='button'
             disabled={isLoading}
             className={`w-full h-12  font-semibold rounded-lg flex justify-center items-center ${colorVariant()}`}
         >

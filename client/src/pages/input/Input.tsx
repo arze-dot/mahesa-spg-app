@@ -12,7 +12,7 @@ const Input: React.FC = () => {
                     <h1 className="text-[#AC1919] text-[24px] font-bold mt-5">INPUT MENU</h1>
                 </div>
                 <div className="grid grid-cols-2 gap-4 p-4 ">
-                    <a href="/dashboard/input/Outletlist" className="bg-[#D3AA4A] flex flex-col items-center justify-center gap-2 border border-black p-4 rounded shadow text-center">
+                    <a href="/dashboard/input/outlet" className="bg-[#D3AA4A] flex flex-col items-center justify-center gap-2 border border-black p-4 rounded shadow text-center">
                         <Icon className='h-[68px] w-[68px] text-[#AC1919]' icon="bi:shop" />
                         <div className='font-semibold text-[14px]'>Data Outlet</div>
                     </a>

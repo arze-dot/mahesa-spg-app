@@ -18,6 +18,8 @@ const Login: React.FC = () => {
             const result = await login(email, password);
             if (result) {
                 navigate('/dashboard');
+            } else {
+                alert('Login gagal, periksa kembali username dan password anda')
             }
             setIsLoading(false);
         }, 2000);
