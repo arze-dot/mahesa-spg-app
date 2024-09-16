@@ -29,6 +29,16 @@ class User extends Authenticatable implements JWTSubject
         'password',
     ];
 
+    public function outlets()
+    {
+        return $this->belongsToMany(Outlet::class);
+    }
+
+    public function assets()
+    {
+        return $this->belongsToMany(Asset::class);
+    }
+
     // JWT methods
     public function getJWTIdentifier()
     {

@@ -1,10 +1,13 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import InputField from "../../../component/InputField";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import ProfilePicture from "../../../component/ProfilePicture";
 import ACT_CREATE_USERS from "../../../api/users/create-user";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../component/Button";
+import SearchSelectInput from "../../../component/SearchSelectInput";
+import ACT_GET_OUTLET from "../../../api/outlets/outlets";
+import ACT_GET_ASSET from "../../../api/assets/assets";
 
 const InputEmployee: React.FC = () => {
 
@@ -18,7 +21,8 @@ const InputEmployee: React.FC = () => {
         address: '',
         birth_date: '',
         employee_status: 'full_time',
-        gender: 'M'
+        gender: 'M',
+        areaCode: ''
     })
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -28,13 +32,88 @@ const InputEmployee: React.FC = () => {
         })
     }
 
+    const [outlet, setOutlet] = useState([
+        {
+            name: '',
+            address: '',
+            latitude: '',
+            longitude: '',
+        }
+    ])
+
+    const handleChangeOutlet = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+        const { name, value } = e.target;
+
+        setOutlet(prevOutlets =>
+            prevOutlets.map((outlet, i) =>
+                i === index ? { ...outlet, [name]: value } : outlet
+            )
+        );
+    };
+
+    const [asset, setAsset] = useState([
+        {
+            name: '',
+            code: '',
+            date_in: '',
+            date_expired: ''
+        }
+    ]);
+
+    const handleChangeAsset = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+        const { name, value } = e.target;
+
+        setAsset(prevAssets =>
+            prevAssets.map((asset, i) =>
+                i === index ? { ...asset, [name]: value } : asset
+            )
+        );
+    };
+
+    const addAsset = () => {
+        setAsset([...assets, {
+            name: '',
+            code: '',
+            date_in: '',
+            date_expired: ''
+        }]);
+
+        setAssetDisabled([...assetDisabled, false])
+    };
+
+    const deleteAsset = (index: number) => {
+        setAsset(prevAssets => prevAssets.filter((_, i) => i !== index));
+        setAssetDisabled(prevAsetDisabled => prevAsetDisabled.filter((_, i) => i !== index))
+    };
+
+
     const handleSubmit = async () => {
         setLoading(true)
         const input = {
             ...data,
+            role: 'USER',
             username: data.email,
-            password: 'admin123',
-            password_confirmation: 'admin123'
+            password: 'kimbo123',
+            password_confirmation: 'kimbo123',
+            outlets: outlet.map((item) => {
+                return {
+                    ...item,
+                    code: 'CODE-1',
+                    area_code: data.areaCode,
+                    created_by: 1,
+                    updated_by: 1,
+                    user_id: 1,
+                    image: null
+                }
+            }),
+            assets: asset.map((item) => {
+                return {
+                    ...item,
+                    created_by: 1,
+                    updated_by: 1,
+                    image: null
+                }
+            })
         }
 
         await ACT_CREATE_USERS(input).then((res) => {
@@ -49,6 +128,66 @@ const InputEmployee: React.FC = () => {
         })
         setLoading(false)
     }
+
+    const addOutlet = () => {
+        setOutlet([...outlet, {
+            name: '',
+            address: '',
+            latitude: '',
+            longitude: '',
+        }])
+        setOutletDisabled([...outletDisabled, false])
+    }
+
+    const deleteOutlet = (index: number) => {
+        // Filter out the outlet at the given index
+        setOutlet(prevOutlets => prevOutlets.filter((_, i) => i !== index));
+        setOutletDisabled(prevOutletDisabled => prevOutletDisabled.filter((_, i) => i !== index))
+    };
+
+    const [outlets, setOutlets] = useState<any[]>([]);
+    const [assets, setAssets] = useState<any[]>([]);
+
+    useEffect(() => {
+        fetchOutlets();
+        fetchAssets();
+    }, []);
+
+    const fetchOutlets = async () => {
+        const result = await ACT_GET_OUTLET();
+        setOutlets(result.data.data);
+    };
+
+    const fetchAssets = async () => {
+        const result = await ACT_GET_ASSET();
+        setAssets(result.data.data);
+    };
+
+    const [outletDisabled, setOutletDisabled] = useState([false])
+    const handleOutlet = (e: any, index: number) => {
+        console.log(e)
+        let dataOutlet = outlets.find((item) => item.id === e.value)
+        setOutlet(prevOutlets =>
+            prevOutlets.map((outlet, i) =>
+                i === index ? { ...dataOutlet } : outlet
+            )
+        );
+        setOutletDisabled(prev => prev.map((_, i) => i === index ? true : false))
+    }
+
+
+    const [assetDisabled, setAssetDisabled] = useState([false])
+    const handleAsset = (e: any, index: number) => {
+        let dataAssets = assets.find((item) => item.id === e.value)
+        setAsset(prevAssets =>
+            prevAssets.map((data, i) =>
+                i === index ? { ...dataAssets } : data
+            )
+        );
+        setAssetDisabled(prev => prev.map((_, i) => i === index ? true : false))
+    }
+
+    console.log(outlet, asset)
     return (
         <div className="rounded-md min-h-screen flex items-center justify-center">
             <div className="bg-[#AFAFAF] rounded-3xl shadow-lg p-5 w-96 pb-[75px] mt-10">
@@ -175,6 +314,220 @@ const InputEmployee: React.FC = () => {
                             <option value="F">Wanita</option>
                         </InputField>
                     </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="kode_area" className="block text-gray-700 text-sm font-bold mb-2">
+                            Kode Area
+                        </label>
+                        <InputField
+                            as="select"
+                            name='areaCode'
+                            placeholder=""
+                            onChangeSelect={(e: ChangeEvent<HTMLSelectElement>) => setData({ ...data, areaCode: e.target.value })}
+                            value={data.areaCode}
+                        >
+                            <option value="PMU">PMU</option>
+                            <option value="PMM">PMM</option>
+                            <option value="PMA">PMA</option>
+                            <option value="PMS">PMS</option>
+                        </InputField>
+                    </div>
+
+
+                    <div className="font-bold my-4">
+                        OUTLET
+                    </div>
+                    {
+                        outlet.map((item, index) => {
+                            return (
+
+                                <div key={index}>
+                                    <div className="mb-4">
+                                        <label className="block text-sm font-bold mb-1">CARI TOKO</label>
+                                        <SearchSelectInput
+                                            placeholder="Cari Nama Toko"
+                                            options={outlets.map((item: any) => ({ label: item.name, value: item.id }))}
+                                            onChange={(selectedOption: any) => handleOutlet(selectedOption, index)}
+                                        />
+                                    </div>
+
+                                    {/* Outlet Name */}
+                                    <div className="mb-4">
+                                        <label htmlFor="name" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Nama Outlet
+                                        </label>
+                                        <InputField
+                                            disabled={outletDisabled[index]}
+                                            icon={<Icon icon={'iconamoon:profile'} fontSize={20} />}
+                                            type='text'
+                                            name='name'
+                                            onChange={(e) => handleChangeOutlet(e, index)}
+                                            value={item.name}
+                                            placeholder="Nama Outlet"
+                                        />
+                                    </div>
+
+                                    {/* Outlet Address */}
+                                    <div className="mb-4">
+                                        <label htmlFor="address" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Alamat
+                                        </label>
+                                        <InputField
+                                            disabled={outletDisabled[index]}
+                                            icon={<Icon icon={'mdi:addr'} fontSize={20} />}
+                                            as="textarea"
+                                            name='address'
+                                            placeholder="Alamat Outlet"
+                                            value={item.address}
+                                            onChangeTextArea={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                                                setOutlet(prevOutlets =>
+                                                    prevOutlets.map((outlet, i) =>
+                                                        i === index ? { ...outlet, address: e.target.value } : outlet
+                                                    )
+                                                )}
+                                        />
+                                    </div>
+
+                                    {/* Coordinates */}
+                                    <div className="mb-4">
+                                        <label htmlFor="coordinates" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Titik Koordinat
+                                        </label>
+                                        <div className="flex space-x-2">
+                                            <InputField
+                                                disabled={outletDisabled[index]}
+                                                icon={<Icon icon={'iconamoon:location-pin'} fontSize={20} />}
+                                                type='text'
+                                                name='latitude'
+                                                onChange={(e) => handleChangeOutlet(e, index)}
+                                                value={item.latitude}
+                                                placeholder="Lat"
+                                            />
+                                            <InputField
+                                                disabled={outletDisabled[index]}
+                                                icon={<Icon icon={'iconamoon:location-pin'} fontSize={20} />}
+                                                type='text'
+                                                name='longitude'
+                                                onChange={(e) => handleChangeOutlet(e, index)}
+                                                value={item.longitude}
+                                                placeholder="Long"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center justify-center mb-6 w-full">
+                                        <Button isLoading={false} onClick={() => deleteOutlet(index)} color="black">
+                                            Hapus Outlet
+                                        </Button>
+                                    </div>
+
+                                </div>
+                            )
+                        })
+                    }
+
+                    <div className="flex items-center justify-center mb-6 w-full">
+                        <Button isLoading={false} onClick={addOutlet} color="golden">
+                            Tambah Outlet
+                        </Button>
+                    </div>
+
+
+                    <hr className="border-4" />
+
+                    <div className="font-bold my-4">
+                        ASSETS
+                    </div>
+
+                    {
+                        asset.map((item, index) => {
+                            return (
+                                <div key={index}>
+                                    <div className="mb-4">
+
+                                        <div className="mb-4">
+                                            <label className="block text-sm font-bold mb-1">CARI ASSET</label>
+                                            <SearchSelectInput
+                                                placeholder="Cari Nama Asset"
+                                                options={assets.map((item: any) => ({ label: item.name, value: item.id }))}
+                                                onChange={(selectedOption: any) => handleAsset(selectedOption, index)}
+                                            />
+                                        </div>
+                                        <label htmlFor="asset_name" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Nama Asset
+                                        </label>
+                                        <InputField
+                                            disabled={assetDisabled[index]}
+                                            icon={<Icon icon={'mdi:warehouse'} fontSize={20} />}
+                                            type='text'
+                                            name='name'
+                                            onChange={(e) => handleChangeAsset(e, index)}
+                                            value={item.name}
+                                            placeholder="Nama Asset"
+                                        />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <label htmlFor="asset_code" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Kode Asset
+                                        </label>
+                                        <InputField
+                                            disabled={assetDisabled[index]}
+                                            icon={<Icon icon={'mdi:barcode'} fontSize={20} />}
+                                            type='text'
+                                            name='code'
+                                            onChange={(e) => handleChangeAsset(e, index)}
+                                            value={item.code}
+                                            placeholder="Kode Asset"
+                                        />
+                                    </div>
+
+                                    <div className="mb-4">
+                                        <label htmlFor="asset_code" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Tanggal Masuk
+                                        </label>
+                                        <InputField
+                                            disabled={assetDisabled[index]}
+                                            icon={<Icon icon={'mdi:calendar-check'} fontSize={20} />}
+                                            type='date'
+                                            name='date_in'
+                                            onChange={(e) => handleChangeAsset(e, index)}
+                                            value={item.date_in}
+                                            placeholder="Tanggal Masuk"
+                                        />
+                                    </div>
+                                    <div className="mb-4">
+                                        <label htmlFor="asset_code" className="block text-gray-700 text-sm font-bold mb-2">
+                                            Tanggal Expired
+                                        </label>
+                                        <InputField
+                                            disabled={assetDisabled[index]}
+                                            icon={<Icon icon={'mdi:calendar-remove'} fontSize={20} />}
+                                            type='date'
+                                            name='date_expired'
+                                            onChange={(e) => handleChangeAsset(e, index)}
+                                            value={item.date_expired}
+                                            placeholder="Tanggal Expired"
+                                        />
+                                    </div>
+
+                                    <div className="flex items-center justify-center mb-6 w-full">
+                                        <Button isLoading={false} onClick={() => deleteAsset(index)} color="black">
+                                            Hapus Asset
+                                        </Button>
+                                    </div>
+                                </div>
+                            )
+                        })
+                    }
+
+                    <div className="flex items-center justify-center mb-6 w-full">
+                        <Button isLoading={false} onClick={addAsset} color="golden">
+                            Tambah Asset
+                        </Button>
+                    </div>
+
+
+                    <hr className="border-4" />
 
                     <div className="flex items-center justify-center mt-6 w-full">
                         <Button isLoading={loading} onClick={handleSubmit} color="red">

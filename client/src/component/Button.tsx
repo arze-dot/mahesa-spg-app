@@ -4,7 +4,7 @@ interface ButtonProps {
     isLoading: boolean;
     onClick: () => void;
     children: React.ReactNode;
-    color?: "red" | "golden"
+    color?: "red" | "golden" | "black"
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -17,6 +17,7 @@ const Button: React.FC<ButtonProps> = ({
     const colorVariant = () => {
         if (color === 'red') return 'bg-[#AC1919] text-white'
         if (color === 'golden') return 'bg-golden text-deep-red'
+        if (color === 'black') return 'bg-black text-white'
 
         return 'bg-golden text-deep-red'
     }

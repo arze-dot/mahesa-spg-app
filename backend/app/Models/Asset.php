@@ -19,5 +19,15 @@ class Asset extends Model
         'updated_by',
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function outlet()
+    {
+        return $this->belongsTo(Outlet::class);
+    }
+
     // Optionally add relationships here
 }

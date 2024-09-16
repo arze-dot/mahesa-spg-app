@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
+use App\Models\Outlet;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
@@ -88,5 +92,89 @@ class UserController extends Controller
         $user->delete();
 
         return response()->json(['message' => 'User deleted successfully']);
+    }
+
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|string',
+            'password' => 'required|string|confirmed',
+            'email' => 'required|email',
+            'full_name' => 'required|string',
+            'nik' => 'required|string',
+            'phone' => 'required|string',
+            'address' => 'required|string',
+            'birth_date' => 'required|date',
+            'employee_status' => 'required|string',
+            'gender' => 'required|string',
+            'role' => 'required|string',
+            'outlets' => 'nullable|array',
+            'outlets.*.id' => 'nullable|exists:outlets,id',
+            'outlets.*.name' => 'nullable|string',
+            'outlets.*.code' => 'nullable|string',
+            'outlets.*.address' => 'nullable|string',
+            'outlets.*.langitude' => 'nullable|string',
+            'outlets.*.latitude' => 'nullable|string',
+            'assets' => 'nullable|array',
+            'assets.*.id' => 'nullable|exists:assets,id',
+            'assets.*.name' => 'nullable|string',
+            'assets.*.code' => 'nullable|string',
+            'assets.*.date_in' => 'nullable|date',
+            'assets.*.date_expired' => 'nullable|date',
+        ]);
+
+        DB::beginTransaction();
+
+        try {
+            // Create User
+            $user = User::create([
+                'full_name' => $validatedData['full_name'],
+                'nik' => $validatedData['nik'],
+                'email' => $validatedData['email'],
+                'phone' => $validatedData['phone'],
+                'address' => $validatedData['address'],
+                'birth_date' => $validatedData['birth_date'],
+                'employee_status' => $validatedData['employee_status'],
+                'gender' => $validatedData['gender'],
+                'role' => $validatedData['role'],
+                'username' => $validatedData['username'],
+                'password' => bcrypt($validatedData['password']),
+            ]);
+
+            // Process Outlets
+            if (isset($validatedData['outlets'])) {
+                foreach ($validatedData['outlets'] as $outletData) {
+                    if (isset($outletData['id'])) {
+                        // Attach existing Outlet
+                        $user->outlets()->attach($outletData['id']);
+                    } else {
+                        // Create new Outlet
+                        $outlet = Outlet::create($outletData);
+                        $user->outlets()->attach($outlet->id);
+                    }
+                }
+            }
+
+            // Process Assets
+            if (isset($validatedData['assets'])) {
+                foreach ($validatedData['assets'] as $assetData) {
+                    if (isset($assetData['id'])) {
+                        // Attach existing Asset
+                        $user->assets()->attach($assetData['id']);
+                    } else {
+                        // Create new Asset
+                        $asset = Asset::create($assetData);
+                        $user->assets()->attach($asset->id);
+                    }
+                }
+            }
+
+            DB::commit();
+
+            return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
+        }
     }
 }

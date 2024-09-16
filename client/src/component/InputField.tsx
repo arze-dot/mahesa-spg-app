@@ -14,6 +14,7 @@ interface InputFieldProps {
     name?: string;
     as?: 'textarea' | 'select'
     children?: ReactNode;
+    disabled?: boolean
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -29,7 +30,8 @@ const InputField: React.FC<InputFieldProps> = ({
     name,
     as,
     children,
-    onChangeSelect
+    onChangeSelect,
+    disabled
 }) => {
     return (
         <div className="relative w-full mb-4">
@@ -45,6 +47,7 @@ const InputField: React.FC<InputFieldProps> = ({
                         value={value}
                         onChange={onChange}
                         name={name}
+                        disabled={disabled}
                         className={`w-full h-12 bg-white rounded-lg py-2 text-black ${icon ? 'pl-10 px-4' : 'px-4 '}`}
                     />
                     {showPasswordToggle && (
@@ -67,6 +70,7 @@ const InputField: React.FC<InputFieldProps> = ({
                     </div>
                     <textarea
                         name={name}
+                        disabled={disabled}
                         value={value}
                         onChange={onChangeTextArea}
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -81,6 +85,8 @@ const InputField: React.FC<InputFieldProps> = ({
                     </div>
                     <select
                         name={name}
+
+                        disabled={disabled}
                         onChange={onChangeSelect}
                         value={value}
                         className={`shadow appearance-none border rounded w-full py-3  text-gray-700 leading-tight focus:outline-none focus:shadow-outline ${icon ? 'px-3 pl-10' : 'px-3'}`}

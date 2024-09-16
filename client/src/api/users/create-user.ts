@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL_REGISTER } from "../../config/constant";
+import { API_URL_INPUT_DATA, API_URL_REGISTER } from "../../config/constant";
 import { Cookies } from "react-cookie";
 
 interface CreateUserInput {
@@ -22,7 +22,7 @@ const ACT_CREATE_USERS = async (input: CreateUserInput) => {
     const token = 'Bearer ' + cookies.get('auth')
 
 
-    return await axios.post(API_URL_REGISTER, input, {
+    return await axios.post(API_URL_INPUT_DATA, input, {
         headers: {
             'Content-type': 'application/json',
             'Authorization': token
