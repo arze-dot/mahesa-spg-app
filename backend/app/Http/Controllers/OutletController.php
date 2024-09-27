@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Asset;
 use Illuminate\Http\Request;
 use App\Models\Outlet;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
@@ -10,7 +11,8 @@ class OutletController extends Controller
 {
     public function index(Request $request)
     {
-        $query = Outlet::query();
+        // Eager load 'users' and 'assets' relationships
+        $query = Outlet::with(['users']);
 
         if ($request->has('search')) {
             $query->where('name', 'like', '%' . $request->search . '%')
@@ -18,13 +20,24 @@ class OutletController extends Controller
         }
 
         $outlets = $query->orderBy($request->get('sort', 'updated_at'), $request->get('order', 'desc'))
-            ->get();
+            ->get()
+            ->map(function ($outlet) {
+                // Get assets related to the current outlet using the outlet_id
+                $assets = Asset::where('outlet_id', $outlet->id)->get();
+
+                return [
+                    'outlet' => $outlet,
+                    'assets' => $assets,  // List of assets related to outlet
+                ];
+            });
 
         return response()->json([
             'message' => 'Outlets retrieved successfully',
             'data' => $outlets
         ]);
     }
+
+
 
     public function store(Request $request)
     {

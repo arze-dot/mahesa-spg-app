@@ -11,6 +11,7 @@ class Asset extends Model
 
     protected $fillable = [
         'name',
+        'outlet_id',
         'code',
         'image',
         'date_in',
@@ -18,11 +19,6 @@ class Asset extends Model
         'created_by',
         'updated_by',
     ];
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class);
-    }
 
     public function outlet()
     {

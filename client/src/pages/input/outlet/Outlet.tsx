@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import ACT_GET_OUTLET from '../../../api/outlets/outlets';
 import { URL } from '../../../config/url_constant';
 import ACT_DELETE_OUTLET from '../../../api/outlets/delete-outlet';
+import Modal from '../../../component/Modal';
 
 const Outlet: React.FC = () => {
   const [data, setData] = useState<any[]>([]);
@@ -43,16 +44,24 @@ const Outlet: React.FC = () => {
     }
   };
 
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const searchValue = e.target.value.toLowerCase();
 
     // Filter the data based on the search term
     const filtered = data.filter((item: any) =>
-      item.name.toLowerCase().includes(searchValue)
+      item.outlet.name.toLowerCase().includes(searchValue)
     );
     setFilteredData(filtered);
   };
 
+
+  const [open, setOpen] = useState<boolean>(false)
+  const [openData, setOpenData] = useState({})
+  const handleOpenData = (data: any) => {
+    setOpen(true)
+    setOpenData(data)
+  }
   return (
     <div>
       <div className="py-1 relative place-items-start justify-center mb-12">
@@ -79,39 +88,47 @@ const Outlet: React.FC = () => {
               <div
                 className="border border-black p-4 mb-4 rounded-lg bg-white shadow-sm flex items-center justify-center gap-4"
                 key={index}
+                onClick={() => handleOpenData(data)}
               >
                 {item.image ? (
                   <img
                     src={'https://api-spg.mahesamegahmandiri.com' + item.image}
                     className="w-[100px] h-[70px] rounded-lg border-2"
-                    alt={item.name}
+                    alt={item.outlet_name}
                   />
                 ) : (
                   <div className="w-[100px] h-[70px] rounded-lg bg-red-800 text-[10px] font-bold text-white flex items-center justify-center">
                     No Image
                   </div>
                 )}
-                <div className="flex-grow">
-                  <div className="font-bold text-[14px]">{item.name}</div>
-                  <div className="text-gray-500 text-[12px]">{item.address}</div>
+                <div className="flex-grow"
+                  onClick={() => handleOpenData(data)}>
+                  <div className="font-bold text-[14px]">{item.outlet.name}</div>
+                  <div className="text-gray-500 text-[12px]">{item.outlet.address}</div>
                 </div>
-                <div className="flex-shrink-0 flex space-x-2">
-                  <Icon
-                    icon="mdi:pencil"
-                    className="text-gray-500 cursor-pointer"
-                    onClick={() => navigate('/dashboard/input/edit-outlet/' + item.id)}
-                  />
-                  <Icon
-                    icon="mdi:delete"
-                    className="text-gray-500 cursor-pointer"
-                    onClick={() => deleteOutlet(item.id)}
-                  />
-                </div>
+
               </div>
             ))
           )}
         </div>
       </div>
+      <Modal show onClose={() => { }} >
+
+        Test
+
+        <div className="flex-shrink-0 flex space-x-2">
+          <Icon
+            icon="mdi:pencil"
+            className="text-gray-500 cursor-pointer"
+            onClick={() => navigate('/dashboard/input/edit-outlet/' + openData.outlet.id)}
+          />
+          <Icon
+            icon="mdi:delete"
+            className="text-gray-500 cursor-pointer"
+            onClick={() => deleteOutlet(openData.outlet.id)}
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

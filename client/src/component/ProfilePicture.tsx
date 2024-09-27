@@ -45,8 +45,9 @@ const ProfilePicture: React.FC<ProfilePictureProps> = ({ name }) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 fontSize: '48px',
-                fontWeight: 'bold'
+                fontWeight: 'bold',
             }}
+            className='shadow-lg'
         >
             {initials}
         </div>

@@ -18,14 +18,9 @@ interface CreateUserInput {
 
 const ACT_CREATE_USERS = async (input: CreateUserInput) => {
 
-    const cookies = new Cookies()
-    const token = 'Bearer ' + cookies.get('auth')
-
-
     return await axios.post(API_URL_INPUT_DATA, input, {
         headers: {
             'Content-type': 'application/json',
-            'Authorization': token
         }
     });
 };

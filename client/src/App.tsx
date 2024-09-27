@@ -20,6 +20,7 @@ import InputProduct from "./pages/input/product/InputProduct";
 import EditProduct from "./pages/input/product/EditProduct";
 import InputAsset from "./pages/input/asset/InputAsset";
 import EditAsset from "./pages/input/asset/EditAsset";
+import SPGInput from "./pages/public/SPGInput";
 
 const App: React.FC = () => {
 
@@ -27,6 +28,7 @@ const App: React.FC = () => {
     <BrowserRouter >
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/input-data" element={<SPGInput />} />
         <Route
           path="/dashboard"
           element={

@@ -113,14 +113,16 @@ class UserController extends Controller
             'outlets.*.name' => 'nullable|string',
             'outlets.*.code' => 'nullable|string',
             'outlets.*.address' => 'nullable|string',
-            'outlets.*.langitude' => 'nullable|string',
+            'outlets.*.longitude' => 'nullable|string',
             'outlets.*.latitude' => 'nullable|string',
-            'assets' => 'nullable|array',
-            'assets.*.id' => 'nullable|exists:assets,id',
-            'assets.*.name' => 'nullable|string',
-            'assets.*.code' => 'nullable|string',
-            'assets.*.date_in' => 'nullable|date',
-            'assets.*.date_expired' => 'nullable|date',
+            'outlets.*.image' => 'nullable|string',
+            'outlets.*.assets' => 'nullable|array',
+            'outlets.*.assets.*.id' => 'nullable|exists:assets,id',
+            'outlets.*.assets.*.name' => 'nullable|string',
+            'outlets.*.assets.*.code' => 'nullable|string',
+            'outlets.*.assets.*.date_in' => 'nullable|date',
+            'outlets.*.assets.*.date_expired' => 'nullable|date',
+            'outlets.*.assets.*.image' => 'nullable|string',
         ]);
 
         DB::beginTransaction();
@@ -141,40 +143,45 @@ class UserController extends Controller
                 'password' => bcrypt($validatedData['password']),
             ]);
 
-            // Process Outlets
+            // Process Outlets and Nested Assets
             if (isset($validatedData['outlets'])) {
                 foreach ($validatedData['outlets'] as $outletData) {
                     if (isset($outletData['id'])) {
-                        // Attach existing Outlet
-                        $user->outlets()->attach($outletData['id']);
+                        // Update existing Outlet
+                        $outlet = Outlet::find($outletData['id']);
+                        $outlet->update($outletData); // Update outlet with provided data
                     } else {
-                        // Create new Outlet
+                        // Create new Outlet, set user_id
+                        $outletData['user_id'] = $user->id; // Set user_id
                         $outlet = Outlet::create($outletData);
-                        $user->outlets()->attach($outlet->id);
                     }
-                }
-            }
 
-            // Process Assets
-            if (isset($validatedData['assets'])) {
-                foreach ($validatedData['assets'] as $assetData) {
-                    if (isset($assetData['id'])) {
-                        // Attach existing Asset
-                        $user->assets()->attach($assetData['id']);
-                    } else {
-                        // Create new Asset
-                        $asset = Asset::create($assetData);
-                        $user->assets()->attach($asset->id);
+                    // Attach outlet to user
+                    $user->outlets()->attach($outlet->id);
+
+                    // Process Assets for the Outlet
+                    if (isset($outletData['assets'])) {
+                        foreach ($outletData['assets'] as $assetData) {
+                            if (isset($assetData['id'])) {
+                                // Update existing Asset
+                                $asset = Asset::find($assetData['id']);
+                                $asset->update($assetData);
+                            } else {
+                                // Create new Asset with the current outlet's id
+                                $assetData['outlet_id'] = $outlet->id; // Ensure asset is assigned to the correct outlet
+                                Asset::create($assetData);
+                            }
+                        }
                     }
                 }
             }
 
             DB::commit();
 
-            return response()->json(['message' => 'User created successfully', 'user' => $user], 201);
+            return response()->json(['message' => 'User, outlets, and assets created/updated successfully', 'user' => $user], 201);
         } catch (\Exception $e) {
             DB::rollBack();
-            return response()->json(['message' => 'Failed to create user', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to create/update user', 'error' => $e->getMessage()], 500);
         }
     }
 }
