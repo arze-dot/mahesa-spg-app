@@ -42,7 +42,7 @@ const ReportSpg: React.FC = () => {
 
     const fetchProducts = async () => {
         const result = await ACT_GET_PRODUCT();
-        setProducts(result.data.data);
+        setProducts(result.data?.data ? result.data.data : []);
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

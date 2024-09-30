@@ -21,6 +21,7 @@ import EditProduct from "./pages/input/product/EditProduct";
 import InputAsset from "./pages/input/asset/InputAsset";
 import EditAsset from "./pages/input/asset/EditAsset";
 import SPGInput from "./pages/public/SPGInput";
+import DailyReportAttendance from "./pages/report/daily-report-attendance/DailyReportAttendance";
 
 const App: React.FC = () => {
 
@@ -64,6 +65,7 @@ const App: React.FC = () => {
           <Route path="report" element={<Report />} />
           <Route path="report/daily-spg" element={<ReportSpg />} />
           <Route path="report/daily-competitor" element={<ReportCompetitor />} />
+          <Route path="report/daily-report-before-after" element={<DailyReportAttendance />} />
 
 
         </Route>

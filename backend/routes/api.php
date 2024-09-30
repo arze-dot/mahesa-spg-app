@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AssetController;
+use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileUploadController;
 use App\Http\Controllers\OutletController;
@@ -29,6 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('register', [AuthController::class, 'register']);
 Route::post('input-data', [UserController::class, 'store']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('outlets', [OutletController::class, 'index']);
+Route::get('assets', [AssetController::class, 'index']);
 
 
 Route::group([
@@ -48,14 +51,12 @@ Route::group([
     Route::delete('products/{id}', [ProductController::class, 'destroy']);
 
     // Asset Routes
-    Route::get('assets', [AssetController::class, 'index']);
     Route::post('assets', [AssetController::class, 'store']);
     Route::get('assets/{id}', [AssetController::class, 'show']);
     Route::put('assets/{id}', [AssetController::class, 'update']);
     Route::delete('assets/{id}', [AssetController::class, 'destroy']);
 
     // Outlet Routes
-    Route::get('outlets', [OutletController::class, 'index']);
     Route::post('outlets', [OutletController::class, 'store']);
     Route::get('outlets/{id}', [OutletController::class, 'show']);
     Route::put('outlets/{id}', [OutletController::class, 'update']);
@@ -67,6 +68,13 @@ Route::group([
     Route::get('reports/{id}', [ReportController::class, 'show']);
     Route::put('reports/{id}', [ReportController::class, 'update']);
     Route::delete('reports/{id}', [ReportController::class, 'destroy']);
+
+    // Report Attendance
+    Route::get('attendances', [AttendanceController::class, 'index']);
+    Route::post('attendances', [AttendanceController::class, 'store']);
+    Route::get('attendances/{id}', [AttendanceController::class, 'show']);
+    Route::put('attendances/{id}', [AttendanceController::class, 'update']);
+    Route::delete('attendances/{id}', [AttendanceController::class, 'destroy']);
 
 
     // Upload 

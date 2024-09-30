@@ -10,3 +10,4 @@ export const API_URL_OUTLET = API_BASE_URL + '/api/outlets';
 export const API_URL_PRODUCT = API_BASE_URL + '/api/products';
 export const API_URL_ASSET = API_BASE_URL + '/api/assets';
 export const API_URL_REPORT = API_BASE_URL + '/api/reports';
+export const API_URL_ATTENDANCE = API_BASE_URL + '/api/attendances';

@@ -21,7 +21,7 @@ const SearchSelectInput: React.FC<SearchSelectInputProps> = ({ placeholder = 'Se
     useEffect(() => {
         setFilteredOptions(
             options.filter(option =>
-                option.label.toLowerCase().includes(searchTerm.toLowerCase())
+                option?.label?.toLowerCase().includes(searchTerm.toLowerCase())
             )
         );
     }, [searchTerm, options]);
