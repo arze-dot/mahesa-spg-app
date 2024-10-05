@@ -8,10 +8,7 @@ import ACT_UPLOAD from '../../../api/upload';
 import ACT_CREATE_OUTLET from '../../../api/outlets/create-outlet';
 
 const InputOutlet: React.FC = () => {
-
-
     const navigate = useNavigate();
-
     const [loading, setLoading] = useState<boolean>(false);
     const [imageSrc, setImageSrc] = useState<string | null>(null);
     const [file, setFile] = useState<File | null>(null);
@@ -72,7 +69,6 @@ const InputOutlet: React.FC = () => {
     };
 
     const handleSubmit = async () => {
-        console.log('test')
         setLoading(true);
         if (file) {
             try {

@@ -10,7 +10,6 @@ import ACT_GET_OUTLET from "../../../api/outlets/outlets";
 import ACT_GET_ASSET from "../../../api/assets/assets";
 
 const InputEmployee: React.FC = () => {
-
     const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate();
     const [data, setData] = useState({
@@ -166,7 +165,7 @@ const InputEmployee: React.FC = () => {
     const [outletDisabled, setOutletDisabled] = useState([false])
     const handleOutlet = (e: any, index: number) => {
         console.log(e)
-        let dataOutlet = outlets.find((item) => item.id === e.value)
+        const dataOutlet = outlets.find((item) => item.id === e.value)
         setOutlet(prevOutlets =>
             prevOutlets.map((outlet, i) =>
                 i === index ? { ...dataOutlet } : outlet
@@ -178,7 +177,7 @@ const InputEmployee: React.FC = () => {
 
     const [assetDisabled, setAssetDisabled] = useState([false])
     const handleAsset = (e: any, index: number) => {
-        let dataAssets = assets.find((item) => item.id === e.value)
+        const dataAssets = assets.find((item) => item.id === e.value)
         setAsset(prevAssets =>
             prevAssets.map((data, i) =>
                 i === index ? { ...dataAssets } : data
@@ -187,7 +186,36 @@ const InputEmployee: React.FC = () => {
         setAssetDisabled(prev => prev.map((_, i) => i === index ? true : false))
     }
 
-    console.log(outlet, asset)
+    const FORMS = [
+        {
+            id: 'data-karyawan',
+            label: "Data Karyawan",
+            fields: [],
+        },
+        {
+            id: 'data-outlet',
+            label: "Outlet",
+            fields: [],
+        },
+        {
+            id: 'data-asset',
+            label: "Asset",
+            fields: [],
+        },
+    ]
+
+    const [stepper, setStepper] = useState<{ current: number }>({ current: 1, })
+
+    const handleNext = () => {
+        if (stepper.current >= FORMS.length) return
+        setStepper((prev) => ({ current: prev.current + 1 }))
+    }
+
+    const handleBack = () => {
+        if (stepper.current <= 1) return
+        setStepper((prev) => ({ current: prev.current - 1 }))
+    }
+
     return (
         <div className="rounded-md min-h-screen flex items-center justify-center">
             <div className="bg-[#AFAFAF] rounded-3xl shadow-lg p-5 w-96 pb-[75px] mt-10">
@@ -195,7 +223,12 @@ const InputEmployee: React.FC = () => {
                     <ProfilePicture name={data.full_name} />
                 </div>
                 <h2 className="text-xl font-bold mb-4 text-center">Nama Karyawan</h2>
-                <form>
+                {JSON.stringify(stepper)}
+                <button onClick={() => handleBack()}>Kembali</button>
+                <button onClick={() => handleNext()}>Selanjutnya</button>
+
+
+                <form className="hidden">
                     <div className="mb-4">
                         <label htmlFor="nama" className="block text-gray-700 text-sm font-bold mb-2">
                             Nama

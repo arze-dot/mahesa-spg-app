@@ -11,7 +11,6 @@ import Report from "./pages/report/Report";
 import ReportSpg from "./pages/report/daily-report-spg/ReportSpg";
 import ReportCompetitor from "./pages/report/daily-report-competitor/ReportCompetitor";
 import { URL } from "./config/url_constant";
-import InputEmployee from "./pages/input/employee/InputEmployee";
 import EditEmployee from "./pages/input/employee/EditEmployee";
 import Outlet from "./pages/input/outlet/Outlet";
 import InputOutlet from "./pages/input/outlet/InputOutlet";
@@ -22,6 +21,7 @@ import InputAsset from "./pages/input/asset/InputAsset";
 import EditAsset from "./pages/input/asset/EditAsset";
 import SPGInput from "./pages/public/SPGInput";
 import DailyReportAttendance from "./pages/report/daily-report-attendance/DailyReportAttendance";
+import InputEmployee from "./pages/input/employee/Inputemployee";
 
 const App: React.FC = () => {
 
@@ -50,7 +50,6 @@ const App: React.FC = () => {
           <Route path="input/employee" element={<Employee />} />
           <Route path={URL.INPUT.INDEX + URL.INPUT.EMPLOYEE.CREATE} element={<InputEmployee />} />
           <Route path={URL.INPUT.INDEX + URL.INPUT.EMPLOYEE.EDIT + '/:id'} element={<EditEmployee />} />
-
 
           {/* INPUT PRODUCT */}
           <Route path="input/product" element={<Product />} />
