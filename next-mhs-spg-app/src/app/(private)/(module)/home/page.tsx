@@ -100,22 +100,27 @@ const Homepage = async () => {
                 <h1 className='w-full font-semibold text-sm text-soft-black'>Report Product</h1>
                 <input type='text' placeholder='Cari produk' className='w-full p-2.5 border border-gray-100' />
                 <section className='grid grid-cols-1 gap-2'>
-                    {reports?.length && reports?.map((report: T_Report) =>
+                    {reports?.length ? reports?.map((report: T_Report) =>
                         <article key={report.id} className='bg-white flex space-x-3 p-2.5'>
                             <Image src={`https://api-spg.mahesamegahmandiri.com${report?.product?.image}`} alt='Icon' width={100} height={100} className='size-16 aspect-square bg-gray-50 object-cover rounded' />
-                            <section>
-                                <p className='text-md text-soft-black'>{report?.product?.name}</p>
-                                <p className='text-xs font-light'>{report?.product?.updated_at as string}</p>
+                            <section className='space-y-1'>
+                                <p className='text-sm text-soft-black capitalize'>{report?.product?.name}</p>
+                                <section className='flex items-center justify-center space-x-3 text-sm text-soft-black'>
+                                    <p className='text-md bg-gray-400/20 rounded p-1.5'>Awal <span className='bg-blue-500 h-full p-1 rounded text-white font-semibold'>{report?.first_stock}</span></p>
+                                    <p className='text-md bg-gray-400/20 rounded p-1.5'>Akhir <span className='bg-green-500 h-full p-1 rounded text-white font-semibold'>{report?.sell_in}</span></p>
+                                </section>
                             </section>
                         </article>
-                    )}
-                    <article className='bg-white flex flex-col justify-center items-center space-y-3 p-12'>
-                        <Image src={'/assets/no-data.png'} alt='Icon' width={80} height={80} className='s p-2 bg-gray-50 rounded-lg aspect-square' />
-                        <p className='text-md text-gray-400  text-center'>
-                            Tidak ada data produk ditemukan
-                        </p>
-                        <Link className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded' href={'/input'}>+ Tambah Produk</Link>
-                    </article>
+                    ) :
+                        <article className='bg-white flex flex-col justify-center items-center space-y-3 p-12'>
+                            <Image src={'/assets/no-data.png'} alt='Icon' width={80} height={80} className='s p-2 bg-gray-50 rounded-lg aspect-square' />
+                            <p className='text-md text-gray-400 text-center'>
+                                Tidak ada report ditemukan
+                            </p>
+                            <Link className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded' href={'/report'}>+ Buat Report</Link>
+                        </article>
+                    }
+
                 </section>
             </div>
 

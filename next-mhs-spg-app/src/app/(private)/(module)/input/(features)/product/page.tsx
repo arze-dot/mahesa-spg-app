@@ -5,6 +5,7 @@ import { ACT_GetProductList } from './_action/action.get.product.list'
 import { T_Product } from '@/api/features/api.report.list'
 import { ICONPACK } from '@/registry/icons'
 import CE_ButtonDelete from './_element/CE_ButtonDelete'
+import CE_Modal from '@/app/(private)/_element/CE_Modal'
 
 const ProductPage = async () => {
     const products: any = await ACT_GetProductList() || []
@@ -15,7 +16,7 @@ const ProductPage = async () => {
 
     return (
         <div className='pb-16'>
-            {/* Product Report */}
+            {/* Products */}
             <div className={'p-3 space-y-3'}>
                 <input type='text' placeholder='Cari produk' className='rounded w-full p-2.5 ' />
                 <section className='grid grid-cols-1 gap-2'>
