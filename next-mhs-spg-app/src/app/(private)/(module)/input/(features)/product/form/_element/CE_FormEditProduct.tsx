@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { cn } from '@/lib/helper/cn';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -93,6 +93,7 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
                     const imageUrl = uploadResponse?.files?.product;
                     const productData = {
                         ...data,
+                        id: id,
                         image: imageUrl,
                         created_by: 1,
                         updated_by: 1
@@ -116,6 +117,7 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
         } else {
             const productData = {
                 ...data,
+                id: id,
                 image: defaultValues?.image,
                 created_by: 1,
                 updated_by: 1

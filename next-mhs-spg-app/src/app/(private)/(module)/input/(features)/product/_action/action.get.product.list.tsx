@@ -1,6 +1,6 @@
 'use server';
 
-import { API_GetProductList } from '@/api/features/api.product.list';
+import { API_GetProductList } from '@/api/features/product/api.product.list';
 
 export async function ACT_GetProductList() {
     try {

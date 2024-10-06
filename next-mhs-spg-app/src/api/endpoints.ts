@@ -14,4 +14,10 @@ export const ENDPOINTS = {
         delete: `${SERVICE_URL}/products`,
         edit: `${SERVICE_URL}/products`,
     },
+    asset: {
+        list: `${SERVICE_URL}/assets`,
+        create: `${SERVICE_URL}/assets`,
+        delete: `${SERVICE_URL}/assets`,
+        edit: `${SERVICE_URL}/assets`,
+    },
 };

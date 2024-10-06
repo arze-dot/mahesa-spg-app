@@ -1,6 +1,6 @@
 'use server';
 
-import { API_DetailProduct, IRq_DetailProduct } from '@/api/features/api.product.detail';
+import { API_DetailProduct, IRq_DetailProduct } from '@/api/features/product/api.product.detail';
 
 export async function ACT_DetailProduct(data: IRq_DetailProduct) {
     try {

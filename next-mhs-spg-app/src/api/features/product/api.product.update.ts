@@ -1,13 +1,15 @@
 "use server";
 
 import axios from "axios";
-import { Rq_headers } from "../common.headers";
-import { ENDPOINTS } from "../endpoints";
+import { Rq_headers } from "../../common.headers";
+import { logger } from "@/lib/logger";
+import { ENDPOINTS } from "../../endpoints";
 import { cookies } from "next/headers";
 
-const identity = "[api/product.create]";
+const identity = "[api/product.edit]";
 
-export interface IRq_CreateProduct {
+export interface IRq_EditProduct {
+    id: string;
     name: string;
     type: string;
     code: string;
@@ -16,10 +18,11 @@ export interface IRq_CreateProduct {
     updated_by: number;
 }
 
-export interface IRs_CreateProduct {
+export interface IRs_EditProduct {
     message: string;
     status: number;
     data: {
+        id: number;
         name: string;
         code: string;
         image: string;
@@ -27,17 +30,16 @@ export interface IRs_CreateProduct {
         updated_by: number;
         updated_at: Date | string;
         created_at: Date | string;
-        id: number;
     };
 }
 
-export async function API_CreateProduct(data: IRq_CreateProduct) {
+export async function API_EditProduct(data: IRq_EditProduct) {
     const token = cookies().get("token")?.value;
     try {
         const response = await axios({
             method: "POST",
             maxBodyLength: Infinity,
-            url: ENDPOINTS.product.create,
+            url: ENDPOINTS.product.delete + `/${data?.id}`,
             headers: {
                 ...Rq_headers,
                 Authorization: "Bearer " + token,
@@ -45,13 +47,13 @@ export async function API_CreateProduct(data: IRq_CreateProduct) {
             data: data,
         });
 
-        const result: IRs_CreateProduct = { status: 201, ...response.data };
+        const result: IRs_EditProduct = { status: 201, ...response.data };
         return result;
     } catch (error: any) {
         return {
             status: 500,
             message: "Failed Create Product",
-            data: null,
+            token: null,
         };
     }
 }

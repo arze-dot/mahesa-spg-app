@@ -1,6 +1,6 @@
 'use server';
 
-import { API_DeleteProduct, IRq_DeleteProduct } from '@/api/features/api.product.delete';
+import { API_DeleteProduct, IRq_DeleteProduct } from '@/api/features/product/api.product.delete';
 
 export async function ACT_DeleteProduct(data: IRq_DeleteProduct) {
     try {

@@ -1,9 +1,9 @@
 "use server";
 
 import axios from "axios";
-import { Rq_headers } from "../common.headers";
+import { Rq_headers } from "../../common.headers";
 import { logger } from "@/lib/logger";
-import { ENDPOINTS } from "../endpoints";
+import { ENDPOINTS } from "../../endpoints";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
