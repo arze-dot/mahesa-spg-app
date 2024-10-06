@@ -112,23 +112,7 @@ const Outlet: React.FC = () => {
           )}
         </div>
       </div>
-      <Modal show onClose={() => { }} >
-
-        Test
-
-        <div className="flex-shrink-0 flex space-x-2">
-          <Icon
-            icon="mdi:pencil"
-            className="text-gray-500 cursor-pointer"
-            onClick={() => navigate('/dashboard/input/edit-outlet/' + openData.outlet.id)}
-          />
-          <Icon
-            icon="mdi:delete"
-            className="text-gray-500 cursor-pointer"
-            onClick={() => deleteOutlet(openData.outlet.id)}
-          />
-        </div>
-      </Modal>
+      ÷
     </div>
   );
 };
