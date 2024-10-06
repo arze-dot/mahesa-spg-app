@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { cn } from '@/lib/helper/cn';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next/navigation';
@@ -27,6 +27,7 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
         register,
         formState: { isValid, isLoading, isSubmitting, errors },
         handleSubmit,
+        watch,
     } = useForm<z.infer<typeof SchemaEditProduct>>({
         resolver: zodResolver(SchemaEditProduct),
         defaultValues: {
@@ -41,9 +42,13 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
         mode: 'onTouched',
     });
 
-    const isDisabled = isSubmitting || isLoading || !isValid;
 
-    const [imageSrc, setImageSrc] = useState<string | null>(null);
+    console.log(watch())
+
+    const isDisabled = isSubmitting || isLoading || !isValid;
+    const defaultImage = `https://api-spg.mahesamegahmandiri.com${defaultValues?.image || ""}`
+
+    const [imageSrc, setImageSrc] = useState<string | null>(defaultImage,);
     const [file, setFile] = useState<File | null>(null);
     const [useWebcam, setUseWebcam] = useState<boolean>(false);
     const webcamRef = React.useRef<Webcam>(null);
@@ -80,7 +85,9 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
             try {
                 const formData = new FormData();
                 formData.append('product', file);
+                console.log(file)
                 const uploadResponse = await ACT_UploadProductImage(formData);
+                console.log(uploadResponse)
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
                     const imageUrl = uploadResponse?.files?.product;
@@ -92,18 +99,36 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
                     };
 
                     const createProductResponse: any = await ACT_EditProduct(productData);
+                    console.log(createProductResponse)
                     if (createProductResponse.status === 201) {
-                        toast.success('Berhasil mengubah produk');
+                        toast.success('Berhasil mengubah produk 1');
                         router.push('/input/product')
 
                     } else {
-                        toast.error('Gagal mengubah produk');
+                        toast.error('Gagal mengubah produk 1');
                     }
                 } else {
-                    toast.error('Gagal mengupload gambar');
+                    toast.error('Gagal mengupload gambar 3');
                 }
             } catch (error) {
                 return error
+            }
+        } else {
+            const productData = {
+                ...data,
+                image: defaultValues?.image,
+                created_by: 1,
+                updated_by: 1
+            };
+
+            const createProductResponse: any = await ACT_EditProduct(productData);
+            console.log(createProductResponse)
+            if (createProductResponse.status === 201) {
+                toast.success('Berhasil mengubah produk 2');
+                router.push('/input/product')
+
+            } else {
+                toast.error('Gagal mengubah produk 2');
             }
         }
     };

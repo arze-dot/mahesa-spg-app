@@ -12,7 +12,7 @@ const ProductEditPage = async (props: Props) => {
     return (
         <div className='p-3 space-y-5'>
             <h1 className='font-base text-lg'>Form Produk</h1>
-            <CE_FormEditProduct id={id} defaultValues={product} />
+            <CE_FormEditProduct id={id} defaultValues={product?.data} />
         </div>
     )
 }

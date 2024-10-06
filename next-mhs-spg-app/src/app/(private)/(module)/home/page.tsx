@@ -74,10 +74,10 @@ const Homepage = async () => {
                             <h1 className='w-full font-semibold text-sm text-soft-black'>Works</h1>
                             <div className='flex justify-between space-x-3 w-full items-start'>
                                 {QUICK_FEATURE?.map((feature) =>
-                                    <article key={feature?.id} className='w-full flex flex-col justify-start items-center text-center space-y-1 p-1.5 aspect-square'>
+                                    <Link href={feature?.path} key={feature?.id} className='w-full flex flex-col justify-start items-center text-center space-y-1 p-1.5 aspect-square'>
                                         <Image src={feature?.icon} alt='Icon' width={22} height={22} />
                                         <p className='text-xs text-gray-500'>{feature?.label}</p>
-                                    </article>
+                                    </Link>
                                 )}
                             </div>
                         </section>

@@ -14,7 +14,7 @@ const ProductPage = async () => {
     }
 
     return (
-        <div className=''>
+        <div className='pb-16'>
             {/* Product Report */}
             <div className={'p-3 space-y-3'}>
                 <input type='text' placeholder='Cari produk' className='rounded w-full p-2.5 ' />
@@ -22,7 +22,7 @@ const ProductPage = async () => {
                     {products?.length && products?.map((product: T_Product) =>
                         <article key={product.id} className='bg-white rounded flex justify-between space-x-3 p-2.5'>
                             <section className='flex space-x-4'>
-                                <Image src={product?.image ? (`https://api-spg.mahesamegahmandiri.com${product?.image}`) : ""} alt='Icon' width={100} height={100} className='size-16 aspect-square bg-gray-50 object-cover rounded' />
+                                <Image src={product?.image ? (`https://api-spg.mahesamegahmandiri.com${product?.image}`) : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQsBGOs2225fFqTfnl5EKlrEUBn5-drby1x3Q&s"} alt='Icon' width={100} height={100} className='size-16 aspect-square bg-gray-50 object-cover rounded' />
                                 <section>
                                     <p className='text-md text-soft-black'>{product?.name}</p>
                                     <p className='text-xs font-light'>{product?.code as string}</p>

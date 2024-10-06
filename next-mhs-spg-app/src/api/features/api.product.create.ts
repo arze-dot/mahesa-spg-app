@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { Rq_headers } from "../common.headers";
-import { logger } from "@/lib/logger";
 import { ENDPOINTS } from "../endpoints";
 import { cookies } from "next/headers";
 
@@ -52,7 +51,7 @@ export async function API_CreateProduct(data: IRq_CreateProduct) {
         return {
             status: 500,
             message: "Failed Create Product",
-            token: null,
+            data: null,
         };
     }
 }

@@ -10,6 +10,7 @@ const CE_ButtonDelete = ({ id }: { id: string }) => {
     const handleDeleteProduct = async (id: string) => {
         try {
             const resp = await ACT_DeleteProduct({ id })
+            console.log(resp)
             return resp
         } catch (error) {
             toast.error("gagal menghapus produk")

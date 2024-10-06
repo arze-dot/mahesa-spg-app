@@ -23,7 +23,7 @@ export async function API_DeleteProduct(data: IRq_DeleteProduct) {
     const token = cookies().get("token")?.value;
     try {
         const response = await axios({
-            method: "PUT",
+            method: "DELETE",
             maxBodyLength: Infinity,
             url: ENDPOINTS.product.edit + `/${data?.id}`,
             headers: {

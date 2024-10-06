@@ -43,6 +43,13 @@ const nextConfig = {
                 pathname: "/storage/**",
                 search: "",
             },
+            {
+                protocol: "https",
+                hostname: "*",
+                port: "",
+                pathname: "*",
+                search: "",
+            },
         ],
     },
     publicRuntimeConfig: {

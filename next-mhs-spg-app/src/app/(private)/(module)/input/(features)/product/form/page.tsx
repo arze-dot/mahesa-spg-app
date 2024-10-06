@@ -81,9 +81,6 @@ const ProductFormCreation = () => {
             try {
                 const formData = new FormData();
                 formData.append('product', file);
-
-
-
                 const uploadResponse = await ACT_UploadProductImage(formData);
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
