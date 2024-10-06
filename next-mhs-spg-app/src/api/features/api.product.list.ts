@@ -21,8 +21,9 @@ export type T_Product = {
 };
 
 export interface IRs_GetProductList {
+    status: number;
     message: string;
-    data: T_Product[] | null;
+    data: T_Product[] | [];
 }
 
 export async function API_GetProductList(

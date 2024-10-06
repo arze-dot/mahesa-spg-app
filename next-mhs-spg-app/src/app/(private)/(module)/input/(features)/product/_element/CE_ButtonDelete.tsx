@@ -16,15 +16,13 @@ const CE_ButtonDelete = ({ id }: { id: string }) => {
         }
     }
     return (
-        <div>
-            <Image
-                src={ICONPACK.trash}
-                alt='Delete Product'
-                onClick={() => handleDeleteProduct(id)}
-                width={16}
-                height={16}
-            />
-        </div>
+        <Image
+            src={ICONPACK.trash}
+            alt='Delete Product'
+            onClick={() => handleDeleteProduct(id)}
+            width={16}
+            height={16}
+        />
     )
 }
 

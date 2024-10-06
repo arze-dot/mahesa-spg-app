@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { ACT_GetReportList } from './_action/action.get.report.list'
-import { IRs_GetReportList, T_Report } from '@/api/features/api.report.list'
+import { T_Report } from '@/api/features/api.report.list'
 
 const DUMMY_USER = {
     id: 'USR_001',
@@ -13,8 +13,35 @@ const DUMMY_USER = {
     profilePicture: '/assets/sample-profile-picture.jpg'
 }
 
+const QUICK_FEATURE = [
+    {
+        id: 'input-product',
+        label: "Tambah Produk",
+        path: '/input/product/form',
+        icon: ICONPACK.plus
+    },
+    {
+        id: 'report-bf',
+        label: "Report Before After",
+        path: '/report/before-after/form',
+        icon: ICONPACK.pencil
+    },
+    {
+        id: 'daily-report',
+        label: "SPG Daily Report",
+        path: '/report/daily/form',
+        icon: ICONPACK.store
+    }
+    , {
+        id: 'competitor-product-report',
+        label: "Product Competitor",
+        path: '/input/product',
+        icon: ICONPACK.box
+    }
+]
+
 const Homepage = async () => {
-    const reports: any = await ACT_GetReportList()
+    const reports: any = await ACT_GetReportList() || []
     return (
         <div>
             {/* Hero Header */}
@@ -45,11 +72,11 @@ const Homepage = async () => {
                         </section>
                         <section className='absolute -bottom-12 right-3 w-[95%] h-auto bg-white rounded-md p-3 px-5 flex flex-col space-y-3'>
                             <h1 className='w-full font-semibold text-sm text-soft-black'>Works</h1>
-                            <div className='flex justify-between space-x-3 w-full'>
-                                {[1, 2, 3, 4].map((i) =>
-                                    <article key={i} className='w-full flex flex-col justify-center items-center text-center space-y-1 p-1.5 aspect-square'>
-                                        <Image src={ICONPACK.homeActive} alt='Icon' width={22} height={22} />
-                                        <p className='text-xs text-gray-500'>Party Insurance</p>
+                            <div className='flex justify-between space-x-3 w-full items-start'>
+                                {QUICK_FEATURE?.map((feature) =>
+                                    <article key={feature?.id} className='w-full flex flex-col justify-start items-center text-center space-y-1 p-1.5 aspect-square'>
+                                        <Image src={feature?.icon} alt='Icon' width={22} height={22} />
+                                        <p className='text-xs text-gray-500'>{feature?.label}</p>
                                     </article>
                                 )}
                             </div>
@@ -73,7 +100,7 @@ const Homepage = async () => {
                 <h1 className='w-full font-semibold text-sm text-soft-black'>Report Product</h1>
                 <input type='text' placeholder='Cari produk' className='w-full p-2.5 border border-gray-100' />
                 <section className='grid grid-cols-1 gap-2'>
-                    {reports?.lenght && reports?.map((report: T_Report) =>
+                    {reports?.length && reports?.map((report: T_Report) =>
                         <article key={report.id} className='bg-white flex space-x-3 p-2.5'>
                             <Image src={`https://api-spg.mahesamegahmandiri.com${report?.product?.image}`} alt='Icon' width={100} height={100} className='size-16 aspect-square bg-gray-50 object-cover rounded' />
                             <section>
