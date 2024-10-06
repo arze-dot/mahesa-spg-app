@@ -8,25 +8,25 @@ const DUMMY_SERVICE = [
         id: 'input-outlet',
         label: 'Input Data Outlet',
         icon: ICONPACK.store,
-        path: '/outlet/creation'
+        path: '/input/outlet'
     },
     {
         id: 'input-product',
         label: 'Input Data Product',
         icon: ICONPACK.box,
-        path: '/product/creation'
+        path: '/input/product'
     },
     {
         id: 'input-asset',
         label: 'Input Data Asset',
         icon: ICONPACK.wheat,
-        path: '/asset/creation'
+        path: '/input/asset'
     },
     {
         id: 'input-employee',
         label: 'Input Data Karyawan',
         icon: ICONPACK.users,
-        path: '/employe/creation'
+        path: '/input/employe'
     }
 ]
 

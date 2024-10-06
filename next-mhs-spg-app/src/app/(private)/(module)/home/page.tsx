@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { ACT_GetReportList } from './_action/action.get.report.list'
-import { IRq_GetReportList, T_Report } from '@/api/features/api.report.list'
+import { T_Report } from '@/api/features/api.report.list'
 
 const DUMMY_USER = {
     id: 'USR_001',

@@ -20,6 +20,8 @@ const ICONPACK = {
     wheat: `${ICONS_DIR}/wheat.svg`,
     users: `${ICONS_DIR}/users.svg`,
     store: `${ICONS_DIR}/store.svg`,
+    trash: `${ICONS_DIR}/trash.svg`,
+    pencil: `${ICONS_DIR}/pencil.svg`,
 };
 
 export { ICONPACK };
