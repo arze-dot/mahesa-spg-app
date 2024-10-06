@@ -183,7 +183,8 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
                 >
                     Submit
                 </button>
-            </form></div>
+            </form>
+        </div>
     )
 }
 
