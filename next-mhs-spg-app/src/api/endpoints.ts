@@ -12,5 +12,6 @@ export const ENDPOINTS = {
         list: `${SERVICE_URL}/products`,
         create: `${SERVICE_URL}/products`,
         delete: `${SERVICE_URL}/products`,
+        edit: `${SERVICE_URL}/products`,
     },
 };

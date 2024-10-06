@@ -34,6 +34,7 @@ export type T_Report = {
 };
 
 export interface IRs_GetReportList {
+    status?: number;
     message: string;
     data: T_Report[] | null;
 }
@@ -71,7 +72,7 @@ export async function API_GetReportList(
         )(error?.response).error();
         return {
             message: "Failed get report data",
-            data: null,
+            data: [],
         };
     }
 }

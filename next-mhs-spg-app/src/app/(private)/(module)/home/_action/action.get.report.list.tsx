@@ -7,6 +7,10 @@ export async function ACT_GetReportList() {
         const response: IRs_GetReportList = await API_GetReportList({});
         return response.data;
     } catch (error) {
-        return error
+        return {
+            status: 500,
+            message: "Failed get reports data",
+            data: []
+        }
     }
 }

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 import { ACT_GetReportList } from './_action/action.get.report.list'
-import { T_Report } from '@/api/features/api.report.list'
+import { IRs_GetReportList, T_Report } from '@/api/features/api.report.list'
 
 const DUMMY_USER = {
     id: 'USR_001',
@@ -73,7 +73,7 @@ const Homepage = async () => {
                 <h1 className='w-full font-semibold text-sm text-soft-black'>Report Product</h1>
                 <input type='text' placeholder='Cari produk' className='w-full p-2.5 border border-gray-100' />
                 <section className='grid grid-cols-1 gap-2'>
-                    {reports?.map((report: T_Report) =>
+                    {reports?.lenght && reports?.map((report: T_Report) =>
                         <article key={report.id} className='bg-white flex space-x-3 p-2.5'>
                             <Image src={`https://api-spg.mahesamegahmandiri.com${report?.product?.image}`} alt='Icon' width={100} height={100} className='size-16 aspect-square bg-gray-50 object-cover rounded' />
                             <section>

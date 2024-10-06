@@ -7,23 +7,23 @@ import { ENDPOINTS } from "../endpoints";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
-const identity = "[api/product.delete]";
+const identity = "[api/product.detail]";
 
-export interface IRq_DeleteProduct {
+export interface IRq_DetailProduct {
     id: string;
 }
 
-export interface IRs_DeleteProduct {
+export interface IRs_DetailProduct {
     message: string;
     status: number;
-    data: null;
+    data: any;
 }
 
-export async function API_DeleteProduct(data: IRq_DeleteProduct) {
+export async function API_DetailProduct(data: IRq_DetailProduct) {
     const token = cookies().get("token")?.value;
     try {
         const response = await axios({
-            method: "PUT",
+            method: "GET",
             maxBodyLength: Infinity,
             url: ENDPOINTS.product.edit + `/${data?.id}`,
             headers: {
@@ -33,7 +33,7 @@ export async function API_DeleteProduct(data: IRq_DeleteProduct) {
         });
         revalidatePath("/input/product");
 
-        const result: IRs_DeleteProduct = { status: 200, ...response.data };
+        const result: IRs_DetailProduct = { status: 200, ...response.data };
         return result;
     } catch (error: any) {
         return {

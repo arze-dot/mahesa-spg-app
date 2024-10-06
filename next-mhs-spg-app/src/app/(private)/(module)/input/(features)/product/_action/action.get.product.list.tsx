@@ -7,6 +7,10 @@ export async function ACT_GetProductList() {
         const response: IRs_GetProductList = await API_GetProductList({});
         return response.data;
     } catch (error) {
-        return error
+        return {
+            status: 500,
+            message: "Failed get product data",
+            data: []
+        }
     }
 }
