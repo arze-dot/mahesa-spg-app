@@ -228,7 +228,7 @@ const InputEmployee: React.FC = () => {
                 <button onClick={() => handleNext()}>Selanjutnya</button>
 
 
-                <form className="hidden">
+                <form className="">
                     <div className="mb-4">
                         <label htmlFor="nama" className="block text-gray-700 text-sm font-bold mb-2">
                             Nama

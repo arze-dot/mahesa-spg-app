@@ -10,7 +10,7 @@ const CE_Header = () => {
     const router = useRouter()
     const pathname = usePathname()
     return (
-        <div className='h-12 sticky w-full top-0 bg-white shadow-sm flex justify-between items-center p-2 space-x-2'>
+        <div className='h-12 sticky w-full top-0 bg-white shadow-sm flex justify-between items-center p-2 space-x-2 z-50'>
             <button onClick={() => router.back()} className='rounded flex items-center space-x-2'>
                 <Image src={ICONPACK.arrowLeft} alt='Back' width={18} height={18} />
                 <h1 className='capitalize text-md font-normal'>{pathname.replaceAll('/', ' ')}</h1>
