@@ -48,9 +48,6 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
         mode: 'onTouched',
     });
 
-
-    console.log(watch())
-
     const isDisabled = isSubmitting || isLoading || !isValid;
     const defaultImage = `https://api-spg.mahesamegahmandiri.com${defaultValues?.image || ""}`
 
@@ -91,9 +88,7 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
             try {
                 const formData = new FormData();
                 formData.append('outlet', file);
-                console.log(file)
                 const uploadResponse = await ACT_UploadOutletImage(formData);
-                console.log(uploadResponse)
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
                     const imageUrl = uploadResponse?.files?.outlet;
@@ -107,7 +102,6 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
                     };
 
                     const createOutletResponse: any = await ACT_EditOutlet(outletData);
-                    console.log(createOutletResponse)
                     if (createOutletResponse.status === 201) {
                         toast.success('Berhasil mengubah outlet 1');
                         router.push('/input/outlet')
@@ -132,7 +126,6 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
             };
 
             const createOutletResponse: any = await ACT_EditOutlet(productData);
-            console.log(createOutletResponse)
             if (createOutletResponse.status === 201) {
                 toast.success('Berhasil mengubah outlet');
                 router.push('/input/outlet')

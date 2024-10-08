@@ -42,9 +42,6 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
         mode: 'onTouched',
     });
 
-
-    console.log(watch())
-
     const isDisabled = isSubmitting || isLoading || !isValid;
     const defaultImage = `https://api-spg.mahesamegahmandiri.com${defaultValues?.image || ""}`
 
@@ -85,9 +82,7 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
             try {
                 const formData = new FormData();
                 formData.append('product', file);
-                console.log(file)
                 const uploadResponse = await ACT_UploadProductImage(formData);
-                console.log(uploadResponse)
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
                     const imageUrl = uploadResponse?.files?.product;
@@ -100,7 +95,6 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
                     };
 
                     const createProductResponse: any = await ACT_EditProduct(productData);
-                    console.log(createProductResponse)
                     if (createProductResponse.status === 201) {
                         toast.success('Berhasil mengubah produk 1');
                         router.push('/input/product')
@@ -124,7 +118,6 @@ const CE_FormEditProduct = ({ id, defaultValues }: { id: string, defaultValues: 
             };
 
             const createProductResponse: any = await ACT_EditProduct(productData);
-            console.log(createProductResponse)
             if (createProductResponse.status === 201) {
                 toast.success('Berhasil mengubah produk 2');
                 router.push('/input/product')

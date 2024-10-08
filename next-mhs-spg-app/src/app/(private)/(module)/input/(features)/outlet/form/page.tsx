@@ -46,8 +46,6 @@ const OutletFormCreation = () => {
         mode: 'onTouched',
     });
 
-    console.log(errors)
-
     const isDisabled = isSubmitting || isLoading
 
     const [imageSrc, setImageSrc] = useState<string | null>(null);
@@ -99,7 +97,6 @@ const OutletFormCreation = () => {
                         code: data?.name
                     };
 
-                    console.log(outletData)
 
                     const createOutletResponse: any = await ACT_CreateOutlet(outletData);
                     if (createOutletResponse.status === 201) {

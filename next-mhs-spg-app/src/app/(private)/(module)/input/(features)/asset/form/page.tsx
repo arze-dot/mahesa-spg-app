@@ -42,7 +42,6 @@ const AssetFormCreation = () => {
         mode: 'onTouched',
     });
 
-    console.log(errors)
 
     const isDisabled = isSubmitting || isLoading
     const [imageSrc, setImageSrc] = useState<string | null>(null);

@@ -32,4 +32,5 @@ export const ENDPOINTS = {
         delete: `${SERVICE_URL}/users`,
         edit: `${SERVICE_URL}/users`,
     },
+    inputData: `${SERVICE_URL}/input-data`,
 };

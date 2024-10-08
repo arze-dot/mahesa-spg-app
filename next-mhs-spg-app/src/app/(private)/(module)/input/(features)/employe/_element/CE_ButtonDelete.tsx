@@ -13,7 +13,7 @@ const CE_ButtonDelete = ({ id }: { id: string }) => {
         try {
             const resp = await ACT_DeleteEmployee({ id })
             toast.success("Berhasil menghapus data pekerja")
-            console.log(resp)
+
             return resp
         } catch (error) {
             toast.error("gagal menghapus data pekerja")

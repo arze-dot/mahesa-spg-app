@@ -56,7 +56,6 @@ export async function API_EditOutlet(data: IRq_EditOutlet) {
         const result: IRs_EditOutlet = { status: 201, ...response.data };
         return result;
     } catch (error: any) {
-        console.log(error);
         return {
             status: 500,
             message: "Failed edit Outlet",

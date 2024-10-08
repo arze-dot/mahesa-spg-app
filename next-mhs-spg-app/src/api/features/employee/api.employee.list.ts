@@ -37,7 +37,6 @@ export interface IRs_GetEmployeeList {
 export async function API_GetEmployeeList(
     data: IRq_GetEmployeeList | null | undefined
 ) {
-    console.log(data);
     const token = cookies().get("token")?.value;
     try {
         const response = await axios({

@@ -45,7 +45,6 @@ const CE_FormEditEmployee = ({ id, defaultValues }: { id: string, defaultValues:
         },
         mode: 'onTouched',
     });
-    console.log(watch())
     const isDisabled = isSubmitting || isLoading || !isValid;
 
     const onSubmit = async (data: T_InputEmployee) => {
@@ -60,7 +59,7 @@ const CE_FormEditEmployee = ({ id, defaultValues }: { id: string, defaultValues:
             };
 
             const createEmployeeResponse: any = await ACT_EditEmployee(employeeData);
-            console.log(createEmployeeResponse)
+
             if (createEmployeeResponse.status === 201) {
                 toast.success('Berhasil mengubah employee 1');
                 router.push('/input/product')
@@ -73,7 +72,7 @@ const CE_FormEditEmployee = ({ id, defaultValues }: { id: string, defaultValues:
         }
     };
     return (
-        <div className='pb-20'>
+        <div className='pb-40'>
             <form onSubmit={handleSubmit(onSubmit)} className='space-y-5'>
                 <section className='space-y-2'>
                     <label className='text-soft-black'>Nama Employee</label>
