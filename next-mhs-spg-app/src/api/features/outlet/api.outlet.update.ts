@@ -43,7 +43,7 @@ export async function API_EditOutlet(data: IRq_EditOutlet) {
     const token = cookies().get("token")?.value;
     try {
         const response = await axios({
-            method: "POST",
+            method: "PUT",
             maxBodyLength: Infinity,
             url: ENDPOINTS.outlet.delete + `/${data?.id}`,
             headers: {
@@ -56,9 +56,10 @@ export async function API_EditOutlet(data: IRq_EditOutlet) {
         const result: IRs_EditOutlet = { status: 201, ...response.data };
         return result;
     } catch (error: any) {
+        console.log(error);
         return {
             status: 500,
-            message: "Failed Create Outlet",
+            message: "Failed edit Outlet",
             data: null,
         };
     }
