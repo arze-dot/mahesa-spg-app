@@ -14,16 +14,16 @@ type T_OutletInput = {
     latitude: string;
     longitude: string;
     code: string;
-    area_code: string;
-    created_by: number;
-    updated_by: number;
-    user_id: number;
+    area_code: string | null;
+    created_by: number | null;
+    updated_by: number | null;
+    user_id: number | null;
     image: string | null;
 };
 
 type T_AssetsInput = {
-    id: number;
-    outlet_id: number;
+    id: number | null;
+    outlet_id: number | null;
     name: string;
     code: string;
     date_in: string;
@@ -31,8 +31,8 @@ type T_AssetsInput = {
     image: string | null;
     created_at: string;
     updated_at: string;
-    created_by: number;
-    updated_by: number;
+    created_by: number | null;
+    updated_by: number | null;
 };
 
 export interface IRq_CreateEmployee {

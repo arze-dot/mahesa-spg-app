@@ -9,7 +9,6 @@ export default function ProtectedLayout({
 }>) {
     return (
         <main className="h-screen ">
-            {/* <CE_Header /> */}
             <div className="min-h-screen bg-[#F6F7F9] h-[1000px] overflow-y-scroll pb-20">
                 {children}
             </div>

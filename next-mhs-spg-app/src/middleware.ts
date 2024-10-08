@@ -6,6 +6,10 @@ export function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const token = request.cookies.get("token")?.value;
 
+    if (token && pathname === "/public") {
+        return;
+    }
+
     if (!token && pathname !== "/login") {
         return NextResponse.redirect(new URL("/login", request.url));
     }
@@ -13,10 +17,14 @@ export function middleware(request: NextRequest) {
     if (token && pathname === "/login") {
         return NextResponse.redirect(new URL("/home", request.url));
     }
-
-    return;
 }
 
 export const config = {
-    matcher: ["/login", "/home/:path*", "/input/:path*", "/report/:path*"],
+    matcher: [
+        "/login",
+        "/public/:path*",
+        "/home/:path*",
+        "/input/:path*",
+        "/report/:path*",
+    ],
 };
