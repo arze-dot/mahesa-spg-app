@@ -87,9 +87,7 @@ const CE_FormEditAsset = ({ id, defaultValues }: { id: string, defaultValues: T_
             try {
                 const formData = new FormData();
                 formData.append('asset', file);
-                console.log(file)
                 const uploadResponse = await ACT_UploadAssetImage(formData);
-                console.log(uploadResponse)
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
                     const imageUrl = uploadResponse?.files?.asset;
@@ -129,7 +127,6 @@ const CE_FormEditAsset = ({ id, defaultValues }: { id: string, defaultValues: T_
             };
 
             const createResponse: any = await ACT_EditAsset(Data);
-            console.log(createResponse)
             if (createResponse.status === 201) {
                 toast.success('Berhasil mengubah asset 2');
                 router.push('/input/asset')
@@ -139,8 +136,6 @@ const CE_FormEditAsset = ({ id, defaultValues }: { id: string, defaultValues: T_
             }
         }
     };
-
-    console.log(errors)
 
     return (
         <div className='pb-20'>

@@ -13,7 +13,6 @@ const CE_ButtonDelete = ({ id }: { id: string }) => {
         try {
             const resp = await ACT_DeleteAsset({ id })
             toast.success("Berhasil menghapus produk")
-            console.log(resp)
             return resp
         } catch (error) {
             toast.error("gagal menghapus produk")

@@ -48,9 +48,6 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
         mode: 'onTouched',
     });
 
-
-    console.log(watch())
-
     const isDisabled = isSubmitting || isLoading || !isValid;
     const defaultImage = `https://api-spg.mahesamegahmandiri.com${defaultValues?.image || ""}`
 
@@ -90,13 +87,11 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
         if (file) {
             try {
                 const formData = new FormData();
-                formData.append('product', file);
-                console.log(file)
+                formData.append('outlet', file);
                 const uploadResponse = await ACT_UploadOutletImage(formData);
-                console.log(uploadResponse)
 
                 if (uploadResponse?.status === 201 || uploadResponse?.status === 200) {
-                    const imageUrl = uploadResponse?.files?.product;
+                    const imageUrl = uploadResponse?.files?.outlet;
                     const outletData = {
                         ...data,
                         id: id,
@@ -107,10 +102,9 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
                     };
 
                     const createOutletResponse: any = await ACT_EditOutlet(outletData);
-                    console.log(createOutletResponse)
                     if (createOutletResponse.status === 201) {
                         toast.success('Berhasil mengubah outlet 1');
-                        router.push('/input/product')
+                        router.push('/input/outlet')
 
                     } else {
                         toast.error('Gagal mengubah outlet 1');
@@ -132,13 +126,12 @@ const CE_FormEditOutlet = ({ id, defaultValues }: { id: string, defaultValues: T
             };
 
             const createOutletResponse: any = await ACT_EditOutlet(productData);
-            console.log(createOutletResponse)
             if (createOutletResponse.status === 201) {
-                toast.success('Berhasil mengubah outlet 2');
-                router.push('/input/product')
+                toast.success('Berhasil mengubah outlet');
+                router.push('/input/outlet')
 
             } else {
-                toast.error('Gagal mengubah outlet 2');
+                toast.error('Gagal mengubah outlet');
             }
         }
     };

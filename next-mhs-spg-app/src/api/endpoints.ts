@@ -26,4 +26,11 @@ export const ENDPOINTS = {
         delete: `${SERVICE_URL}/outlets`,
         edit: `${SERVICE_URL}/outlets`,
     },
+    employee: {
+        list: `${SERVICE_URL}/users`,
+        create: `${SERVICE_URL}/users`,
+        delete: `${SERVICE_URL}/users`,
+        edit: `${SERVICE_URL}/users`,
+    },
+    inputData: `${SERVICE_URL}/input-data`,
 };

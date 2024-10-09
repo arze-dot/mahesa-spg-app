@@ -22,28 +22,28 @@ const QUICK_FEATURE = [
     },
     {
         id: 'report-bf',
-        label: "Report Before After",
-        path: '/report/before-after/form',
-        icon: ICONPACK.pencil
+        label: "Data Outlet",
+        path: '/input/outlet',
+        icon: ICONPACK.store
     },
     {
         id: 'daily-report',
-        label: "SPG Daily Report",
-        path: '/report/daily/form',
-        icon: ICONPACK.store
+        label: "Data Asset",
+        path: '/input/asset/form',
+        icon: ICONPACK.box
     }
     , {
         id: 'competitor-product-report',
-        label: "Product Competitor",
-        path: '/input/product',
-        icon: ICONPACK.box
+        label: "Tambah Pekerja",
+        path: '/input/employee/form',
+        icon: ICONPACK.users
     }
 ]
 
 const Homepage = async () => {
     const reports: any = await ACT_GetReportList() || []
     return (
-        <div>
+        <div className='pb-20'>
             {/* Hero Header */}
             <div className='relative h-60'>
                 <div className='relative'>
@@ -129,26 +129,31 @@ const Homepage = async () => {
                 <div className='bg-white p-3 space-y-2'>
                     <h1 className='w-full font-semibold text-sm text-soft-black'>Activity</h1>
                     <section className='grid grid-cols-1 gap-4 divide-y'>
-                        {[1, 2, 3, 4, 5].map((report) =>
+                        {[1, 2, 3, 4].map((report) =>
                             <article key={report} className='flex space-x-3 p-1'>
                                 <Image src={ICONPACK.bookCheck} alt='Icon' width={22} height={22} className='size-10 p-2.5 bg-gray-50 rounded-full aspect-square' />
                                 <section>
-                                    <p className='text-md text-soft-black'>Report produk sosis sapi freeze</p>
+                                    <p className='text-md text-soft-black'>Input Report produk sosis sapi freeze</p>
                                     <p className='text-xs font-light'>05 October 2024 10:00 Am</p>
                                 </section>
                             </article>
                         )}
                     </section>
+                </div>
+            </div>
+
+            {/* Activity Report */}
+            <div className='p-3 space-y-4'>
+                <div className='bg-white p-3 space-y-2'>
+                    <h1 className='w-full font-semibold text-sm text-soft-black'>Daily</h1>
                     <article className='bg-white flex flex-col justify-center items-center space-y-3 p-12'>
                         <Image src={'/assets/no-data.png'} alt='Icon' width={80} height={80} className='s p-2 bg-gray-50 rounded-lg aspect-square' />
                         <p className='text-md text-gray-400  text-center'>
                             Belum ada report aktifitas hari ini
                         </p>
-                        <Link className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded' href={'/input'}>+ Buat Laporan</Link>
+                        <Link className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded' href={'/input'}>+ Buat Laporan Daily</Link>
                     </article>
                 </div>
-
-
             </div>
         </div>
     )

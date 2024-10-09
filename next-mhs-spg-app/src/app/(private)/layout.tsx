@@ -8,9 +8,8 @@ export default function ProtectedLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="h-screen ">
-            {/* <CE_Header /> */}
-            <div className="min-h-screen bg-[#F6F7F9] h-[1000px] overflow-y-scroll pb-20">
+        <main className="h-screen">
+            <div className="h-screen bg-[#F6F7F9] overflow-y-scroll">
                 {children}
             </div>
             <CE_ClientBottomBar />
