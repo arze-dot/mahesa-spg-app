@@ -29,19 +29,25 @@ const OutletPage = async () => {
                                     <p className='text-xs font-light'>{epmloyee?.email as string}</p>
                                 </section>
                             </section>
-                            <CE_ButtonDelete id={String(epmloyee?.id)} />
-                        </article>
+<<<<<<< HEAD
+    <CE_ButtonDelete id={String(epmloyee?.id)} />
+=======
+                            <section className='flex justify-center items-center space-x-5'>
+                                <CE_ButtonDelete id={String(epmloyee?.id)} />
+                            </section>
+>>>>>>> 391ce8a7b9aab7dd63d7b46678266d631756d743
+                        </article >
                     )}
-                    <article className={!employees?.length ? 'bg-white flex flex-col justify-center items-center space-y-3 p-12' : 'hidden'}>
-                        <Image src={'/assets/no-data.png'} alt='Icon' width={80} height={80} className='s p-2 bg-gray-50 rounded-lg aspect-square' />
-                        <p className='text-md text-gray-400  text-center'>
-                            Tidak ada data produk ditemukan
-                        </p>
-                        <Link href={'/public/employee/form'} className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded'>+ Tambah Produk</Link>
-                    </article>
-                </section>
-            </div>
-        </div>
+<article className={!employees?.length ? 'bg-white flex flex-col justify-center items-center space-y-3 p-12' : 'hidden'}>
+    <Image src={'/assets/no-data.png'} alt='Icon' width={80} height={80} className='s p-2 bg-gray-50 rounded-lg aspect-square' />
+    <p className='text-md text-gray-400  text-center'>
+        Tidak ada data produk ditemukan
+    </p>
+    <Link href={'/public/employee/form'} className='bg-kimbo-red/90 text-white p-1 px-2.5 text-sm rounded'>+ Tambah Produk</Link>
+</article>
+                </section >
+            </div >
+        </div >
     )
 }
 
